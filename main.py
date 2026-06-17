@@ -1,21 +1,33 @@
-from tools.followupboss import get_people
+from fastapi import FastAPI
+from services.followupboss_service import FollowUpBossService
 
-print("Getting leads...")
+app = FastAPI(
+    title="MoodyAI",
+    version="0.4"
+)
 
-people = get_people()
+fub = FollowUpBossService()
 
-from tools.followupboss import get_people
 
-people = get_people()
+@app.get("/")
+def home():
+    return {
+        "status": "running"
+    }
 
-for person in people.get("people", []):
 
-    print("---------------------------------")
+@app.get("/leads/latest")
+def latest_leads():
+    return fub.get_latest_leads()
 
-    print("Name:", person.get("displayName"))
 
-    print("Email:", person.get("primaryEmail"))
+@app.get("/lead/latest")
+def latest_lead():
+    leads = fub.get_latest_leads(1)
 
-    print("Phone:", person.get("primaryPhone"))
+    if not leads:
+        return {
+            "message": "No leads found."
+        }
 
-    print("Stage:", person.get("stage"))
+    return leads[0]
