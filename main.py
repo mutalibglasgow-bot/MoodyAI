@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-
+from app.services.lead_service import LeadService
 from app.services.followupboss_service import FollowUpBossService
 from app.services.openai_service import OpenAIService
 
@@ -10,7 +10,7 @@ app = FastAPI(
 
 fub = FollowUpBossService()
 ai = OpenAIService()
-
+lead_service = LeadService()
 
 @app.get("/")
 def root():
@@ -20,6 +20,9 @@ def root():
         "version": "0.5.0"
     }
 
+@app.get("/lead/latest/action-plan")
+def latest_action_plan():
+    return lead_service.get_latest_action_plan()
 
 @app.get("/leads/latest")
 def latest_leads():
