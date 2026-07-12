@@ -1,0 +1,37 @@
+{
+  "date": "2026-07-02",
+  "sensor_name": "Follow Up Boss Sensor",
+  "signal_count": 1,
+  "average_score": 95.0,
+  "signals": [
+    {
+      "signal_name": "High-Intent Follow Up Boss Leads Detected",
+      "source": "Follow Up Boss API",
+      "signal_type": "Lead Activity",
+      "summary": "Detected 21 high-intent leads. Top leads: Khalil Hale, Crystal Rymer, Mischa Quinn, Deborah Viramontes, LISA DUBOS.",
+      "why_it_matters": "These leads may represent immediate revenue opportunities. They should be prioritized because they are already in Moody's pipeline.",
+      "affected_opportunities": [
+        "Local Home Sellers",
+        "Move-Up Buyers",
+        "High-Equity Homeowners",
+        "BSW / Physician Relocation"
+      ],
+      "likely_client_types": [
+        "Motivated sellers",
+        "Cash offer leads",
+        "Relocation buyers",
+        "High-intent prospects"
+      ],
+      "future_questions_people_will_ask": [
+        "What is my home worth?",
+        "Should I sell now?",
+        "What are my options?",
+        "Who can help me move quickly?"
+      ],
+      "time_horizon": "Immediate",
+      "confidence": 0.9,
+      "business_value_score": 95,
+      "generated_at": "2026-07-02T18:17:32.222939"
+    }
+  ]
+}

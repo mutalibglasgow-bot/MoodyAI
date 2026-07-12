@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="MoodyAI turns business signals into decisions—and decisions into action." />
+  <title>MoodyAI | AI Business Decision Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/styles.css?v=1.2.0" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" data-view-button="overview" aria-label="MoodyAI home">
+        <span class="brand-mark">M</span>
+        <span><strong>MoodyAI</strong><small>Business Decision Platform</small></span>
+      </a>
+
+      <nav class="nav" aria-label="Product navigation">
+        <button class="nav-item active" data-view="overview"><span>⌂</span>Command Center</button>
+        <button class="nav-item" data-view="opportunities"><span>◆</span>Opportunities</button>
+        <button class="nav-item" data-view="leads"><span>◎</span>Lead Intelligence</button>
+        <button class="nav-item" data-view="advisor"><span>✦</span>AI Advisor</button>
+        <button class="nav-item" data-view="architecture"><span>⌘</span>How MoodyAI Works</button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="creator-card">
+          <div class="avatar">MG</div>
+          <div><strong>Moody Glasgow</strong><small>AI Product Builder</small></div>
+        </div>
+        <a class="portfolio-link" href="https://moodyglasgowai.netlify.app/" target="_blank" rel="noreferrer">View Moody's portfolio ↗</a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="topbar-title">
+          <button class="mobile-menu" id="mobileMenu" aria-label="Open menu">☰</button>
+          <div><p class="eyebrow">MOODYAI / BUSINESS INTELLIGENCE</p><h1 id="pageTitle">Command Center</h1></div>
+        </div>
+        <div class="topbar-actions">
+          <span class="environment-badge" id="environmentBadge">Demo environment</span>
+          <span class="status-dot"><i></i><span id="systemMode">Connecting…</span></span>
+          <button class="primary-button" data-open-advisor>Ask MoodyAI</button>
+        </div>
+      </header>
+
+      <section class="view active" id="overview-view">
+        <div class="demo-note" id="demoNote">
+          <strong>Product demonstration</strong>
+          <span>Representative business data shows how MoodyAI identifies opportunities, explains why they matter, and helps take action.</span>
+        </div>
+
+        <article class="hero-panel opportunity-hero">
+          <div class="hero-copy">
+            <span class="kicker">TODAY'S BEST OPPORTUNITY</span>
+            <div class="hero-badges" id="topOpportunityBadges"></div>
+            <h2 id="topOpportunityTitle">Analyzing current business opportunities…</h2>
+            <p id="topOpportunitySummary">MoodyAI analyzes CRM activity, market signals, website behavior, and local knowledge to identify where the next hour of work can have the greatest impact.</p>
+            <div class="first-action" id="topFirstAction" hidden></div>
+            <div class="hero-actions">
+              <button class="primary-button large" id="viewTopOpportunity">View full analysis</button>
+              <button class="secondary-button large" data-open-advisor>Ask why this matters</button>
+            </div>
+          </div>
+          <div class="hero-score-card">
+            <span>OPPORTUNITY SCORE</span>
+            <strong id="topOpportunityScore">--</strong>
+            <div class="score-track"><i id="topOpportunityBar"></i></div>
+            <dl>
+              <div><dt>Confidence</dt><dd id="topOpportunityConfidence">--</dd></div>
+              <div><dt>Urgency</dt><dd id="topOpportunityUrgency">--</dd></div>
+              <div><dt>Time horizon</dt><dd id="topOpportunityHorizon">--</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <div class="metrics-grid" id="metricsGrid"></div>
+
+        <div class="content-grid">
+          <article class="panel span-7">
+            <div class="panel-heading"><div><p class="section-label">RANKED OPPORTUNITIES</p><h3>Where to focus next</h3></div><button class="text-button" data-view-button="opportunities">See all →</button></div>
+            <div id="opportunityPreview" class="opportunity-preview loading-block">Analyzing current business opportunities…</div>
+          </article>
+          <article class="panel span-5">
+            <div class="panel-heading"><div><p class="section-label">SYSTEM STATUS</p><h3>Connected intelligence</h3></div><span class="live-pill">ACTIVE</span></div>
+            <div id="systemStatus" class="system-list"></div>
+          </article>
+          <article class="panel span-12">
+            <div class="panel-heading"><div><p class="section-label">TODAY'S EXECUTION</p><h3>Recommended next steps</h3></div><span class="live-pill">PRIORITIZED</span></div>
+            <div id="todayActions" class="action-strip loading-block">Prioritizing today's next steps…</div>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="opportunities-view">
+        <div class="section-intro opportunity-intro">
+          <div><span class="kicker">OPPORTUNITY INTELLIGENCE</span><h2>From signals to action.</h2><p>Every opportunity includes the business case, supporting evidence, recommended next steps, and tools to execute.</p></div>
+          <div class="filter-group" id="opportunityFilters"></div>
+        </div>
+        <div class="opportunity-layout">
+          <div id="opportunityList" class="opportunity-list loading-block">Analyzing current business opportunities…</div>
+          <aside id="opportunityDetail" class="opportunity-detail empty-detail">
+            <div><span class="detail-icon">◆</span><h3>Select an opportunity</h3><p>Open any ranked opportunity to review what MoodyAI found, why it matters, and what to do next.</p></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="view" id="leads-view">
+        <div class="section-intro"><div><span class="kicker">CRM INTELLIGENCE</span><h2>Know who needs attention now.</h2><p>Leads are ranked using contactability, behavior, stage, source, and recent activity.</p></div></div>
+        <div class="panel"><div id="allLeads" class="lead-table loading-block">Ranking lead activity…</div></div>
+      </section>
+
+      <section class="view" id="advisor-view">
+        <div class="advisor-layout">
+          <div class="advisor-copy">
+            <span class="kicker">DECISION SUPPORT</span>
+            <h2>Ask what deserves your attention today.</h2>
+            <p>The advisor combines current opportunities with local knowledge to recommend a focused next move.</p>
+            <div class="prompt-list">
+              <button>What should I do today?</button>
+              <button>Which opportunity has the highest potential?</button>
+              <button>Who should I contact first?</button>
+              <button>What content should I create next?</button>
+            </div>
+          </div>
+          <div class="advisor-card">
+            <div class="chat-window" id="chatWindow"><div class="message assistant"><span class="message-icon">M</span><div><strong>MoodyAI</strong><p>Ask me which opportunity deserves attention, who to contact, or what action to take next.</p></div></div></div>
+            <form class="chat-form" id="advisorForm"><textarea id="advisorInput" rows="2" placeholder="Ask a business question…" required></textarea><button type="submit" aria-label="Send question">↑</button></form>
+            <small class="mode-note" id="advisorMode">Responses use live AI when configured and demonstration logic otherwise.</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="architecture-view">
+        <div class="section-intro">
+          <div>
+            <span class="kicker">HOW MOODYAI WORKS</span>
+            <h2>From signals to action.</h2>
+            <p>MoodyAI combines CRM activity, market signals, website behavior, and local knowledge to identify high-value opportunities. Each opportunity is ranked, explained, and paired with practical tools for marketing and client communication.</p>
+          </div>
+        </div>
+        <div class="architecture-map">
+          <div class="arch-layer"><span>EXPERIENCE</span><div><article><b>Opportunity Dashboard</b><small>Focused business decisions</small></article><article><b>Action Center</b><small>Ready-to-use content and outreach</small></article><article><b>AI Advisor</b><small>Natural-language decision support</small></article></div></div>
+          <div class="connector">↓</div>
+          <div class="arch-layer"><span>APPLICATION</span><div><article><b>FastAPI</b><small>API and orchestration</small></article><article><b>Opportunity Model</b><small>Validated business objects</small></article><article><b>Report Engine</b><small>Ranked executive output</small></article></div></div>
+          <div class="connector">↓</div>
+          <div class="arch-layer"><span>INTELLIGENCE</span><div><article><b>OpenAI</b><small>Reasoning and generation</small></article><article><b>Signal Engine</b><small>Trend classification</small></article><article><b>Knowledge Base</b><small>Bell County context</small></article></div></div>
+          <div class="connector">↓</div>
+          <div class="arch-layer"><span>DATA SOURCES</span><div><article><b>Follow Up Boss</b><small>Lead and activity data</small></article><article><b>Search Console</b><small>Organic demand data</small></article><article><b>Local Sources</b><small>Employment and growth</small></article></div></div>
+        </div>
+      </section>
+
+      <footer class="product-footer">
+        <strong>MoodyAI</strong>
+        <span>Turning business signals into decisions—and decisions into action.</span>
+      </footer>
+    </main>
+  </div>
+  <script src="/static/app.js?v=1.2.0"></script>
+</body>
+</html>

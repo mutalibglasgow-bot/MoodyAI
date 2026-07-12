@@ -1,0 +1,163 @@
+{
+  "generated_at": "2026-07-02T18:17:52.524793",
+  "hypotheses": [
+    {
+      "hypothesis_name": "Immediate Seller Activity Surge in Bell County Driven by High-Intent Leads and FSBO Interest",
+      "summary": "A convergence of consistently high Follow Up Boss hot lead activity, including motivated buyers and sellers seeking cash offers, coupled with steady FSBO versus Realtor search interest in Belton, indicates increased near-term listing opportunities. This suggests a growing pool of high-equity homeowners and sellers ready to act imminently, creating abundant short-term revenue and listing potential.",
+      "supporting_signals": [
+        "Follow Up Boss (FUB) Hot Leads - high activity and engagement indicating imminent buying/selling intent",
+        "High-Intent Follow Up Boss Leads Detected - 21 prioritized leads showing immediate revenue opportunity",
+        "Belton Seller and FSBO Searches - steady FSBO versus Realtor interest reflecting local seller intent"
+      ],
+      "predicted_client_need": "Immediate guidance on pricing, selling options (FSBO vs Realtor), rapid cash offers, and strategies to move quickly in a competitive market",
+      "future_questions_people_will_ask": [
+        "How to source cash offers quickly?",
+        "Should I sell FSBO or use a Realtor in Belton?",
+        "What is my home worth?",
+        "Should I sell now?",
+        "Who can help me move quickly?"
+      ],
+      "affected_opportunities": [
+        "Immediate client acquisition",
+        "Listing opportunities",
+        "Cash offer sourcing",
+        "Local Home Sellers",
+        "Move-Up Buyers"
+      ],
+      "time_horizon": "Immediate (days to weeks)",
+      "revenue_potential": 95,
+      "listing_potential": 90,
+      "high_price_potential": 75,
+      "time_efficiency": 85,
+      "moody_advantage": 90,
+      "competition_risk": 40,
+      "confidence": 0.95,
+      "overall_intelligence_score": 89
+    },
+    {
+      "hypothesis_name": "Physician and High-Income Healthcare Relocation Demand Will Drive Mid to Long-Term Luxury and Executive Market Growth",
+      "summary": "Ongoing Baylor Scott & White physician relocation searches and classified BSW healthcare hiring signals forecast a considerable mid-to-long-term influx of high-income medical professionals needing housing near hospitals in Temple and surrounding areas. These clients exhibit complex lifestyle and financial questions emphasizing neighborhood quality, school options, commute, and investment value, pointing to luxury, move-up, and executive relocation segments as valuable markets.",
+      "supporting_signals": [
+        "BSW Physician Relocation Searches - steady interest in Temple vs Austin and neighborhoods near BSW",
+        "BSW Healthcare Hiring Demand Classified - 52 postings translating to significant future housing demand",
+        "Temple vs Belton Searches - ongoing comparative searches indicating relocation decision complexity"
+      ],
+      "predicted_client_need": "Comprehensive relocation support covering lifestyle, mortgage options (physician-specific), school recommendations, commute evaluations, and luxury home buying guidance",
+      "future_questions_people_will_ask": [
+        "Where should I live if I work at BSW Temple?",
+        "Is Belton or Temple better for BSW physicians?",
+        "What neighborhoods are best near BSW?",
+        "Should I buy or rent first?",
+        "What physician mortgage options are available?",
+        "How do Temple and Belton compare for families and medical professionals?"
+      ],
+      "affected_opportunities": [
+        "Physician relocation client acquisition",
+        "High-Income Healthcare Professionals",
+        "Luxury Home Buyers",
+        "Executive Corporate Relocations",
+        "Move-Up Buyers"
+      ],
+      "time_horizon": "Mid to Long-term (30-180 days)",
+      "revenue_potential": 100,
+      "listing_potential": 85,
+      "high_price_potential": 95,
+      "time_efficiency": 70,
+      "moody_advantage": 85,
+      "competition_risk": 50,
+      "confidence": 0.9,
+      "overall_intelligence_score": 86
+    },
+    {
+      "hypothesis_name": "Temple's Economic Development and Industrial Expansion Will Generate Future Demand Across Multiple Buyer Segments Over 6-36 Months",
+      "summary": "Robust economic development activity in Temple, including over $3.5B private investment, jobs growth, data center projects, and available shovel-ready land, signals substantial upcoming demand from investors, move-up buyers, corporate relocation buyers, and builders. This multifaceted growth will create long-term housing demand that Moody can capture through targeted investor and relocation content, neighborhood education, and builder relationships.",
+      "supporting_signals": [
+        "Temple Growth / Economic Development Activity Detected - job increases, private investments, and industrial projects",
+        "Signals indicating opportunities for investors, builders, high-equity homeowners, and corporate relocations"
+      ],
+      "predicted_client_need": "Information on growth corridors, neighborhood appreciation predictions, investment potential, and timing to buy before prices rise",
+      "future_questions_people_will_ask": [
+        "What is being built in Temple?",
+        "Will this development affect home values?",
+        "Should I buy before prices rise?",
+        "Which neighborhoods will benefit from growth?",
+        "Should investors buy near new development?"
+      ],
+      "affected_opportunities": [
+        "Residential Investors",
+        "Move-Up Buyers",
+        "New Construction Buyers",
+        "Executive Corporate Relocations",
+        "Local Home Sellers"
+      ],
+      "time_horizon": "Long-term (6-36 months)",
+      "revenue_potential": 90,
+      "listing_potential": 80,
+      "high_price_potential": 70,
+      "time_efficiency": 60,
+      "moody_advantage": 80,
+      "competition_risk": 55,
+      "confidence": 0.8,
+      "overall_intelligence_score": 79
+    },
+    {
+      "hypothesis_name": "Emerging Military PCS Demand from Fort Cavazos Represents a Mid-Term Growth Segment That Requires Proactive Content and Relationship Building",
+      "summary": "Early, albeit low current, search interest related to Fort Cavazos military PCS relocations signals a potentially substantial mid- to long-term demand segment. Military families face unique relocation challenges including VA loans, school choices, and community fit, requiring targeted resources and trusted advisement well before move-in.",
+      "supporting_signals": [
+        "Fort Cavazos / Military PCS Searches - early signs despite low volume",
+        "Existing PCS relocation content frameworks with high trust potential"
+      ],
+      "predicted_client_need": "Military relocation guides, VA loan education, community comparisons (Belton vs Harker Heights), and timely communication aligned with PCS timelines",
+      "future_questions_people_will_ask": [
+        "What housing options are available near Fort Cavazos?",
+        "How is the local market for military PCS moves?",
+        "Should we rent first?",
+        "Can we buy before arriving?",
+        "Which schools are best?"
+      ],
+      "affected_opportunities": [
+        "Military Relocation Programs",
+        "Fort Cavazos PCS Housing Guides",
+        "Local Home Sellers",
+        "First-Time Buyers"
+      ],
+      "time_horizon": "Mid to Long-term (weeks to months)",
+      "revenue_potential": 70,
+      "listing_potential": 65,
+      "high_price_potential": 60,
+      "time_efficiency": 75,
+      "moody_advantage": 70,
+      "competition_risk": 70,
+      "confidence": 0.6,
+      "overall_intelligence_score": 67
+    },
+    {
+      "hypothesis_name": "Low Current Demand in Luxury and Lake Belton Market Signals Opportunity for Early Positioning but Requires Vigilant Monitoring",
+      "summary": "The absence of current luxury and Lake Belton-related search demands suggests a down cycle or seasonal lull in luxury and lake lifestyle transactions. However, given the high commission potential and strong referral value of this niche, Moody can strategically prepare targeted content and build relationships ahead of resurgence, minimizing competition risk.",
+      "supporting_signals": [
+        "Luxury and Lake Belton Searches - no observed current demand",
+        "Related signals absent in property tax and similar high-tier content"
+      ],
+      "predicted_client_need": "Lifestyle education, market outlook, luxury neighborhood tours, and lake living insights when market revives",
+      "future_questions_people_will_ask": [
+        "Is Lake Belton worth the premium?",
+        "Which luxury neighborhoods appreciate best?",
+        "What waterfront property is available?",
+        "Are short-term rentals allowed?"
+      ],
+      "affected_opportunities": [
+        "Luxury Home Buyers",
+        "Lake Belton Lifestyle Buyers"
+      ],
+      "time_horizon": "Not immediate (6+ months)",
+      "revenue_potential": 60,
+      "listing_potential": 50,
+      "high_price_potential": 90,
+      "time_efficiency": 40,
+      "moody_advantage": 65,
+      "competition_risk": 30,
+      "confidence": 0.0,
+      "overall_intelligence_score": 47
+    }
+  ]
+}

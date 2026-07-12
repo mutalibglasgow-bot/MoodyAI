@@ -1,0 +1,155 @@
+{
+  "generated_at": "2026-07-02T12:05:34.007912",
+  "hypotheses": [
+    {
+      "hypothesis_name": "High-Intent Lead Clustering Indicates Imminent Transaction Surge",
+      "summary": "Current data shows unusually high lead engagement scores, multiple repeated visit patterns for cash offer seekers, and 21 identified high-intent leads within Moody's pipeline. This convergence predicts an imminent surge in transaction volume primarily from motivated buyers and sellers seeking fast-closing deals, especially in Bell County and Belton. Moody's advantage lies in rapidly converting these high-propensity clients by addressing urgent questions related to sourcing cash offers, timing sales, and financing options.",
+      "supporting_signals": [
+        "Follow Up Boss Lead Engagement High Activity",
+        "High-Intent Follow Up Boss Leads Detected",
+        "Belton Seller Search and FSBO Interest"
+      ],
+      "predicted_client_need": "Immediate expert guidance on fast transactions, cash offers, and market timing to capitalize on current high urgency.",
+      "future_questions_people_will_ask": [
+        "How to source cash offers in Bell County?",
+        "When is the right time to sell in Belton?",
+        "What financing options help with quick purchases?",
+        "What is my home worth?",
+        "Should I sell now?"
+      ],
+      "affected_opportunities": [
+        "Active Buyer Leads",
+        "Cash Offer Transactions",
+        "Belton Seller Leads",
+        "FSBO Market Engagement",
+        "Local Home Sellers"
+      ],
+      "time_horizon": "Immediate to Short Term",
+      "revenue_potential": 90,
+      "listing_potential": 85,
+      "high_price_potential": 60,
+      "time_efficiency": 80,
+      "moody_advantage": 85,
+      "competition_risk": 50,
+      "confidence": 0.95,
+      "overall_intelligence_score": 85
+    },
+    {
+      "hypothesis_name": "BSW Physician Relocation Remains a Stable, High-Value Mid-Term Opportunity with Growing Neighborhood Comparison Search Demand",
+      "summary": "Consistent high search interest around Baylor Scott & White physician relocation combined with growing comparative queries between Temple and Belton signals a steady stream of mid-term relocation clients. These clients highly value detailed neighborhood insights, lifestyle compatibility, and cost of living comparisons. Moody's AI should continue to build authoritative content targeting physicians, medical residents, and healthcare workers while monitoring hiring patterns at BSW to time engagement. This opportunity demands specialized content around commute, financing, and school quality to preemptively address relocation anxiety.",
+      "supporting_signals": [
+        "BSW / Physician Relocation Search Interest",
+        "Temple vs Belton Buyer Comparison Searches",
+        "Follow Up Boss Lead Engagement High Activity"
+      ],
+      "predicted_client_need": "Comprehensive relocation guidance focusing on neighborhood suitability, commute, and finance for healthcare professionals relocating to Bell County.",
+      "future_questions_people_will_ask": [
+        "Is Temple TX better than Austin for medical professionals?",
+        "What are the best neighborhoods near BSW Temple?",
+        "How does cost of living compare between Temple and Austin for doctors?",
+        "Is Temple or Belton better for first-time buyers?",
+        "What are property tax differences between Temple and Belton?"
+      ],
+      "affected_opportunities": [
+        "Physician Relocation Leads",
+        "Temple Market Growth",
+        "Medical Professional Buyer Segments",
+        "Belton Buyer Leads",
+        "Temple Buyer Leads"
+      ],
+      "time_horizon": "Mid to Long Term",
+      "revenue_potential": 85,
+      "listing_potential": 70,
+      "high_price_potential": 90,
+      "time_efficiency": 70,
+      "moody_advantage": 80,
+      "competition_risk": 40,
+      "confidence": 0.9,
+      "overall_intelligence_score": 80
+    },
+    {
+      "hypothesis_name": "Belton Seller Interest and FSBO Search Growth Suggest Increasing Listing Opportunities from Educated, Cautious Sellers",
+      "summary": "Stable seller-related searches and FSBO interest in Belton indicate a growing segment of homeowners actively considering listing or self-selling. These sellers ask strategic questions about timing, pricing, and representation. Moody's ability to capture this segment depends on producing in-depth seller education content and nuanced guides that demonstrate expertise, clarify selling options, and build trust early. This knowledge-based approach can differentiate Moody in a competitive market segment sensitive to commission and service value.",
+      "supporting_signals": [
+        "Belton Seller Search and FSBO Interest",
+        "High-Intent Follow Up Boss Leads Detected",
+        "Follow Up Boss Lead Engagement High Activity"
+      ],
+      "predicted_client_need": "Advanced seller education on market conditions, FSBO pros and cons, and pricing strategy in Belton.",
+      "future_questions_people_will_ask": [
+        "Should I sell my home FSBO or with a realtor in Belton?",
+        "What are current market conditions for sellers in Belton?",
+        "How to price a home for sale in Belton?"
+      ],
+      "affected_opportunities": [
+        "Belton Seller Leads",
+        "FSBO Market Engagement"
+      ],
+      "time_horizon": "Short to Mid Term",
+      "revenue_potential": 75,
+      "listing_potential": 80,
+      "high_price_potential": 55,
+      "time_efficiency": 70,
+      "moody_advantage": 75,
+      "competition_risk": 55,
+      "confidence": 0.85,
+      "overall_intelligence_score": 75
+    },
+    {
+      "hypothesis_name": "Emerging Military PCS Demand for Fort Cavazos Housing Will Grow to Significant Mid-Term Market Segment",
+      "summary": "Though early in emergence phase with moderate confidence, PCS-related searches and anticipated military family relocations portend a substantial future housing demand tied to Fort Cavazos. Military families prioritize school quality, commute, VA loan guidance, and community safety. Moody's opportunity lies in preemptively creating authoritative relocation content, VA loan education, and PCS process guidance to become the trusted resource as families receive orders. Current low visibility among competitors increases Moody's potential market capture before others engage.",
+      "supporting_signals": [
+        "Emerging Military PCS and Fort Cavazos Housing Searches",
+        "High-Intent Follow Up Boss Leads Detected",
+        "Belton Seller Search and FSBO Interest"
+      ],
+      "predicted_client_need": "Comprehensive military relocation advisory focusing on PCS timelines, VA loans, safe neighborhoods, schools, and commute.",
+      "future_questions_people_will_ask": [
+        "What are the best homes near Fort Cavazos?",
+        "How to find military relocation housing?",
+        "What are property tax implications for PCS moves?"
+      ],
+      "affected_opportunities": [
+        "Military Relocation Leads",
+        "Fort Cavazos Housing Market"
+      ],
+      "time_horizon": "Mid Term",
+      "revenue_potential": 80,
+      "listing_potential": 75,
+      "high_price_potential": 70,
+      "time_efficiency": 60,
+      "moody_advantage": 90,
+      "competition_risk": 30,
+      "confidence": 0.6,
+      "overall_intelligence_score": 70
+    },
+    {
+      "hypothesis_name": "Belton Low-Price-Point Buyer Interest Is Promising but Requires Specialized First-Time Buyer Engagement",
+      "summary": "Strong social media engagement around Belton homes under $400k aligns with first-time buyer demographics, often budget-conscious and family-oriented. This segment is driven more by affordability and entry-level housing availability than luxury or immediate transaction urgency. Moody can capture this audience by focusing on educational resources addressing affordability, loan programs, and first-time buyer rebates, supported by optimized social and SEO content. Though lower in per-transaction revenue, volume and referral potential are notable.",
+      "supporting_signals": [
+        "Belton Homes Under $400k SEO and Social Media Engagement",
+        "First-Time Home Buyers Opportunity Playbook",
+        "BSW / Physician Relocation Search Interest"
+      ],
+      "predicted_client_need": "Education on affordability, financing options, and neighborhood suitability for first-time home purchase in Belton.",
+      "future_questions_people_will_ask": [
+        "What are good affordable homes in Belton under $400k?",
+        "How to apply for first-time buyer programs in Belton?",
+        "Are there new constructions available in Belton under $400k?"
+      ],
+      "affected_opportunities": [
+        "First-Time Buyer Leads",
+        "Belton Entry-Level Market"
+      ],
+      "time_horizon": "Short to Mid Term",
+      "revenue_potential": 70,
+      "listing_potential": 50,
+      "high_price_potential": 30,
+      "time_efficiency": 65,
+      "moody_advantage": 75,
+      "competition_risk": 60,
+      "confidence": 0.78,
+      "overall_intelligence_score": 65
+    }
+  ]
+}

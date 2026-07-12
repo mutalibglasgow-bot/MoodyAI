@@ -24,4 +24,9 @@ __pycache__/
 .vscode/
 
 # Logs
-*.log
+*.log*.pyc
+data/responses/
+data/reports/
+growth-agent.json
+credentials.json
+token.json

@@ -1,0 +1,184 @@
+{
+  "date": "2026-07-02",
+  "sensor_name": "Search Console Sensor",
+  "signal_count": 8,
+  "average_score": 62.5,
+  "signals": [
+    {
+      "signal_name": "Follow Up Boss (FUB) Hot Leads",
+      "source": "Intelligence Reports 2026-06-23 to 2026-06-25",
+      "signal_type": "Search Demand",
+      "summary": "Consistently high activity and engagement from Follow Up Boss leads, notably leads like Kelsie Livingston, Deborah Viramontes, and Whitney Shawlewis, indicate imminent buying/selling intent in Bell County's housing market.",
+      "why_it_matters": "This strong inbound lead activity is predictive of near-term real estate transactions, making prompt follow-up crucial to capture deals and build long-term client relationships.",
+      "affected_opportunities": [
+        "Immediate client acquisition",
+        "Listing opportunities",
+        "Cash offer sourcing"
+      ],
+      "likely_client_types": [
+        "Active buyers",
+        "Sellers sourcing cash offers",
+        "Investors"
+      ],
+      "future_questions_people_will_ask": [
+        "How to source cash offers quickly?",
+        "How to evaluate Realtor vs FSBO in Belton?"
+      ],
+      "time_horizon": "Immediate (days to weeks)",
+      "confidence": 0.95,
+      "business_value_score": 100,
+      "generated_at": "2026-07-02T18:17:31.491308"
+    },
+    {
+      "signal_name": "BSW Physician Relocation Searches",
+      "source": "Daily Intelligence and Growth Reports 2026-06-23 to 2026-06-25",
+      "signal_type": "Search Demand",
+      "summary": "Consistent interest and search engagement around physician relocation topics focusing on Temple vs Austin, best neighborhoods near BSW Temple, and physician salary comparisons.",
+      "why_it_matters": "Physician relocation searches are steady and growing, representing a high-value, qualified lead segment for real estate buyers who need housing near BSW and medical facilities.",
+      "affected_opportunities": [
+        "Physician relocation client acquisition",
+        "Mid-to-long-term lead funnel"
+      ],
+      "likely_client_types": [
+        "Medical professionals relocating to Bell County",
+        "Physician families",
+        "Healthcare workers"
+      ],
+      "future_questions_people_will_ask": [
+        "Where to live near BSW Temple?",
+        "Temple vs Austin cost of living for physicians",
+        "Best neighborhoods for medical residents"
+      ],
+      "time_horizon": "Mid to Long-term (weeks to months)",
+      "confidence": 0.9,
+      "business_value_score": 100,
+      "generated_at": "2026-07-02T18:17:31.491308"
+    },
+    {
+      "signal_name": "Belton Seller and FSBO Searches",
+      "source": "Intelligence Reports and SEO Reports 2026-06-23 to 2026-06-25",
+      "signal_type": "Search Demand",
+      "summary": "Steady search interest around Belton seller topics, including FSBO versus Realtor comparisons and home values under $400k, indicate consistent local seller intent and opportunity.",
+      "why_it_matters": "Seller searches in Belton represent a stable and actionable pipeline for targeting homeowner listings and building credibility through educational content.",
+      "affected_opportunities": [
+        "Seller lead capture",
+        "Local market domination in Belton",
+        "FSBO educational content marketing"
+      ],
+      "likely_client_types": [
+        "Belton home sellers",
+        "FSBO sellers",
+        "Realtors targeting Bell County"
+      ],
+      "future_questions_people_will_ask": [
+        "Should I sell FSBO or use a Realtor in Belton?",
+        "What are current home values under $400k in Belton?"
+      ],
+      "time_horizon": "Near to Mid-term (weeks)",
+      "confidence": 0.85,
+      "business_value_score": 100,
+      "generated_at": "2026-07-02T18:17:31.491308"
+    },
+    {
+      "signal_name": "Temple vs Belton Searches",
+      "source": "Content Priorities and SEO Growth Report 2026-06-23 to 2026-06-25",
+      "signal_type": "Search Demand",
+      "summary": "Ongoing search behavior compares living costs, salaries (especially for physicians), neighborhood characteristics, and housing market conditions between Temple and Belton.",
+      "why_it_matters": "Users comparing Temple and Belton suggests demand for relocation guidance, affecting both buyer and seller markets and influencing local market share dynamics.",
+      "affected_opportunities": [
+        "Physician relocation content",
+        "Neighborhood guides",
+        "Relocation lead generation"
+      ],
+      "likely_client_types": [
+        "Relocating families",
+        "Medical professionals",
+        "First-time buyers considering these areas"
+      ],
+      "future_questions_people_will_ask": [
+        "How do Temple and Belton compare for families and medical professionals?",
+        "Which city offers better housing value?"
+      ],
+      "time_horizon": "Mid-term (weeks to months)",
+      "confidence": 0.8,
+      "business_value_score": 90,
+      "generated_at": "2026-07-02T18:17:31.491308"
+    },
+    {
+      "signal_name": "Fort Cavazos / Military PCS Searches",
+      "source": "Intelligence Report 2026-06-23 Watchlist",
+      "signal_type": "Search Demand",
+      "summary": "Early signs of search interest linked to Fort Cavazos military PCS relocation, though current demand is low and requires proactive content development.",
+      "why_it_matters": "Military PCS families represent a future housing demand segment; timely preparation of PCS housing guides can capture leads as migration activity increases.",
+      "affected_opportunities": [
+        "Military relocation programs",
+        "Fort Cavazos PCS housing guides"
+      ],
+      "likely_client_types": [
+        "Military families",
+        "Veterans",
+        "Relocation specialists"
+      ],
+      "future_questions_people_will_ask": [
+        "What housing options are available near Fort Cavazos?",
+        "How is the local market for military PCS moves?"
+      ],
+      "time_horizon": "Mid to Long-term",
+      "confidence": 0.6,
+      "business_value_score": 70,
+      "generated_at": "2026-07-02T18:17:31.491308"
+    },
+    {
+      "signal_name": "Luxury and Lake Belton Searches",
+      "source": "Intelligence History Data 2026-06-23 to 2026-06-25",
+      "signal_type": "Search Demand",
+      "summary": "No observed current demand or emerging search signals related to luxury real estate or Lake Belton properties in the recent reports and intelligence data.",
+      "why_it_matters": "Absence of demand signals suggests lower current market interest; monitoring should continue for any emergent trends.",
+      "affected_opportunities": [],
+      "likely_client_types": [],
+      "future_questions_people_will_ask": [],
+      "time_horizon": "Not immediate",
+      "confidence": 0.0,
+      "business_value_score": 0,
+      "generated_at": "2026-07-02T18:17:31.491308"
+    },
+    {
+      "signal_name": "First-Time Buyer and New Construction Searches",
+      "source": "Intelligence Watchlist and SEO Reports",
+      "signal_type": "Search Demand",
+      "summary": "Limited explicit mentions or scoring on first-time buyer and new construction searches; temple buyers have low but steady volume with some interest in new construction.",
+      "why_it_matters": "While currently low volume, first-time buyer and new construction segments could develop with market shifts; continued monitoring recommended.",
+      "affected_opportunities": [
+        "First-time buyer lead nurture",
+        "New construction project targeting"
+      ],
+      "likely_client_types": [
+        "First-time homebuyers",
+        "Developers",
+        "Investors"
+      ],
+      "future_questions_people_will_ask": [
+        "What new construction options exist in Temple?",
+        "What programs assist first-time buyers in Bell County?"
+      ],
+      "time_horizon": "Mid to Long-term",
+      "confidence": 0.5,
+      "business_value_score": 40,
+      "generated_at": "2026-07-02T18:17:31.491308"
+    },
+    {
+      "signal_name": "Property Tax and Related Searches",
+      "source": "No direct signals in recent reports",
+      "signal_type": "Search Demand",
+      "summary": "No current reported SEO or follow-up boss lead signals specifically focused on property tax inquiries or concerns in Bell County.",
+      "why_it_matters": "Absence of notable search activity for property tax topics suggests low immediate buyer/seller concern or lack of targeted content currently.",
+      "affected_opportunities": [],
+      "likely_client_types": [],
+      "future_questions_people_will_ask": [],
+      "time_horizon": "Not immediate",
+      "confidence": 0.0,
+      "business_value_score": 0,
+      "generated_at": "2026-07-02T18:17:31.491308"
+    }
+  ]
+}

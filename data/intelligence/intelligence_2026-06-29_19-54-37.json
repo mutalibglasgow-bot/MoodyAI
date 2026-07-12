@@ -1,0 +1,135 @@
+{
+  "generated_at": "2026-06-29T19:53:55.837519",
+  "hypotheses": [
+    {
+      "hypothesis_name": "Immediate Seller Demand Grows in Belton Driven by High-Equity Homeowners and FSBO Interest",
+      "summary": "Belton is showing rising seller activity as evidenced by high-intent Follow Up Boss leads, stable FSBO and seller educational search demand, and strong engagement from homeowners seeking cash offers. This convergence indicates many local homeowners with significant equity are contemplating sales. Sellers will increasingly seek advisory services on timing, pricing, and selling vs FSBO decisions.",
+      "supporting_signals": [
+        "Follow Up Boss Lead Engagement High Activity (including cash offer seekers)",
+        "Belton Seller Search and FSBO Interest",
+        "High-Intent Follow Up Boss Leads Detected",
+        "Belton Homes Under $400k SEO and Social Media Engagement (indirectly reflecting market health)"
+      ],
+      "predicted_client_need": "Trusted advisor services providing home valuation, market timing guidance, pricing strategy, and FSBO vs Realtor decision support.",
+      "future_questions_people_will_ask": [
+        "Should I sell my home FSBO or with a realtor in Belton?",
+        "When is the right time to sell in Belton?",
+        "What is my home worth?",
+        "How to price my home competitively?",
+        "How do cash offers work and when should I consider them?"
+      ],
+      "affected_opportunities": [
+        "Local Home Sellers",
+        "High-Equity Homeowners",
+        "Move-Up Buyers",
+        "Cash Offer Transactions"
+      ],
+      "time_horizon": "Immediate to Short Term",
+      "revenue_potential": 85,
+      "listing_potential": 90,
+      "high_price_potential": 65,
+      "time_efficiency": 80,
+      "moody_advantage": 85,
+      "competition_risk": 40,
+      "confidence": 0.92,
+      "overall_intelligence_score": 85
+    },
+    {
+      "hypothesis_name": "Physician and Healthcare Professional Relocation Demand is Concentrated in Mid to Long Term with Distinct Subsegments",
+      "summary": "Steady and high search interest around Baylor Scott & White (BSW) physician relocation and Temple vs Austin comparisons signals a stable stream of incoming healthcare professionals. This demand primarily supports mid to long-term relocation planning. Residents and fellows seek short-term rental or entry-level housing while established attending physicians require neighborhood expertise focusing on lifestyle, schools, and investment.",
+      "supporting_signals": [
+        "BSW / Physician Relocation Search Interest",
+        "Temple vs Belton Buyer Comparison Searches",
+        "High-Intent Follow Up Boss Leads Detected (relocation segment included)"
+      ],
+      "predicted_client_need": "Differentiated relocation advisory services: residency-focused rental/buy vs attending physicians seeking long-term community fit and investment.",
+      "future_questions_people_will_ask": [
+        "Is Temple TX better than Austin for medical professionals?",
+        "What neighborhoods near BSW Temple offer the best schools and lifestyle?",
+        "Should I rent during residency or buy?",
+        "How does cost of living compare between Temple and Belton for doctors?",
+        "Where do physicians live long term in Bell County?"
+      ],
+      "affected_opportunities": [
+        "BSW Physician Relocation Leads",
+        "High-Income Healthcare Professionals",
+        "Established Attending Physicians",
+        "First-Time Home Buyers (residents)"
+      ],
+      "time_horizon": "Mid to Long Term",
+      "revenue_potential": 90,
+      "listing_potential": 60,
+      "high_price_potential": 80,
+      "time_efficiency": 70,
+      "moody_advantage": 90,
+      "competition_risk": 30,
+      "confidence": 0.9,
+      "overall_intelligence_score": 85
+    },
+    {
+      "hypothesis_name": "Builder Activity and Affordable Housing Searches Signal Potential Move-Up Buyer Activation",
+      "summary": "High social media and SEO engagement around homes under $400k in Belton combined with monitoring of builder incentives suggests the entry-level housing segment is vibrant and could catalyze move-up buyers seeking to upgrade. Move-up buyers are seeking advice on affordability, neighborhood fit, and timing in a market fed by new construction growth and incentive dynamics.",
+      "supporting_signals": [
+        "Belton Homes Under $400k SEO and Social Media Engagement",
+        "Temple vs Belton Buyer Comparison Searches",
+        "Follow Up Boss Lead Engagement High Activity",
+        "Leading Indicator: Builder Activity Intelligence (inferred builder incentives and inventory)"
+      ],
+      "predicted_client_need": "Education on move vs remodel decisions, neighborhood comparisons, and builder selection guidance.",
+      "future_questions_people_will_ask": [
+        "Can I afford a bigger house now?",
+        "Should I buy new construction or resale?",
+        "Which builders offer the best incentives?",
+        "What neighborhoods fit growing families?",
+        "Is now a good time to upgrade?"
+      ],
+      "affected_opportunities": [
+        "Move-Up Buyers",
+        "New Construction Buyers",
+        "First-Time Home Buyers",
+        "Growing Families"
+      ],
+      "time_horizon": "Short to Mid Term",
+      "revenue_potential": 80,
+      "listing_potential": 75,
+      "high_price_potential": 70,
+      "time_efficiency": 75,
+      "moody_advantage": 80,
+      "competition_risk": 50,
+      "confidence": 0.85,
+      "overall_intelligence_score": 78
+    },
+    {
+      "hypothesis_name": "Emerging Military PCS Relocations Will Create Growing Mid-Term Demand for Family-Oriented Housing Near Fort Cavazos",
+      "summary": "Early monitoring of increasing searches related to Fort Cavazos PCS moves indicates a future surge in military family housing demand. The segment requires specific relocation resources addressing VA loans, commute, schools, and community fit. This opportunity remains underutilized by most competitors and demands proactive preparation.",
+      "supporting_signals": [
+        "Emerging Military PCS and Fort Cavazos Housing Searches",
+        "High-Intent Follow Up Boss Leads Detected (military segment)",
+        "BSW / Physician Relocation Search Interest (overlapping relocation dynamics)"
+      ],
+      "predicted_client_need": "Targeted relocation guides, VA loan education, commute analysis, and neighborhood recommendations focusing on family needs.",
+      "future_questions_people_will_ask": [
+        "What are the best homes near Fort Cavazos?",
+        "How to find military relocation housing?",
+        "Can I use my VA loan here?",
+        "Which schools serve military families near Fort Cavazos?",
+        "Should we rent or buy first?"
+      ],
+      "affected_opportunities": [
+        "Fort Cavazos PCS Enlisted Families",
+        "Military Relocation Leads",
+        "First-Time Home Buyers (military)",
+        "Growing Families"
+      ],
+      "time_horizon": "Mid Term",
+      "revenue_potential": 70,
+      "listing_potential": 70,
+      "high_price_potential": 55,
+      "time_efficiency": 65,
+      "moody_advantage": 85,
+      "competition_risk": 25,
+      "confidence": 0.7,
+      "overall_intelligence_score": 68
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "date": "2026-07-02",
+  "sensor_name": "Temple EDC / Growth Sensor",
+  "signal_count": 1,
+  "average_score": 100.0,
+  "signals": [
+    {
+      "signal_name": "Temple Growth / Economic Development Activity Detected",
+      "source": "Temple EDC / City of Temple Growth Sources",
+      "signal_type": "Economic Development",
+      "summary": "Detected 58 Temple growth and economic-development signals. Data center mentions: 5. Investment mentions: 14. Acreage/land mentions: 3. Jobs/employment mentions: 5. Industrial/distribution/manufacturing mentions: 14. Examples: Temple Economic Development Corporation | Temple TX; Austin\u2019s Industrial Gateway; Temple is on the cusp of significant growth and economic development \u2013 in everything from population to quality of life amenities to corporate investment. Check out our latest stats.; 16.5% Increase in Jobs; $3.5B+ Private Investment; 2,000 Shovel-Ready Acres Available; Learn about our industry assets and access the data, sites and information needed to make your move to Temple.; Properties in Temple span across industrial and commercial business needs and everything in between.",
+      "why_it_matters": "Temple economic-development activity is a leading indicator of future housing demand. Major employers, industrial projects, data centers, land purchases, and infrastructure investment can create future buyers, sellers, investors, builders, renters, and relocation clients.",
+      "affected_opportunities": [
+        "High-Equity Homeowners",
+        "Local Home Sellers",
+        "Residential Investors",
+        "Executive Corporate Relocations",
+        "New Construction Buyers",
+        "Move-Up Buyers",
+        "Remote Workers & Digital Professionals",
+        "Acreage & Ranch Buyers"
+      ],
+      "likely_client_types": [
+        "Investors",
+        "Builders",
+        "High-equity homeowners",
+        "Corporate relocation buyers",
+        "Move-up buyers",
+        "Local sellers near growth corridors",
+        "Employees relocating for new jobs"
+      ],
+      "future_questions_people_will_ask": [
+        "What is being built in Temple?",
+        "Will this development affect home values?",
+        "Should I buy before prices rise?",
+        "Which neighborhoods will benefit from growth?",
+        "Is East or South Temple becoming a growth corridor?",
+        "Should investors buy near new development?",
+        "Will data centers affect Temple real estate?"
+      ],
+      "time_horizon": "6-36 months",
+      "confidence": 0.8,
+      "business_value_score": 100,
+      "generated_at": "2026-07-02T18:17:52.087609"
+    }
+  ]
+}

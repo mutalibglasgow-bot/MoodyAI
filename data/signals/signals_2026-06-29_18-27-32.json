@@ -1,0 +1,188 @@
+```json
+{
+  "generated_at": "2026-06-29T18:27:06.975635",
+  "signals": [
+    {
+      "signal_name": "High-Intent Physician Relocation Leads via Follow Up Boss",
+      "source": "Multiple Daily Reports (2026-06-23 to 2026-06-25), Priority Report",
+      "signal_type": "Lead Activity",
+      "summary": "Several high-score, highly engaged Follow Up Boss leads (notably Kelsie Livingston, Deborah Viramontes, Whitney Shawlewis) are in active transaction stages sourcing cash offers, indicating imminent buying and selling intent from Baylor Scott & White (BSW)-affiliated medical professionals.",
+      "why_it_matters": "These leads represent near-term conversion opportunities with high commission potential and reinforce Moody's reputation in the lucrative BSW physician relocation niche. Immediate outreach is critical to secure listings or buyers.",
+      "affected_opportunities": [
+        "BSW / Physician Relocation",
+        "High-Equity Sellers (due to cash offer sourcing)",
+        "Luxury Buyer / Seller Opportunities (physician income level implied)"
+      ],
+      "likely_client_types": [
+        "BSW attending physicians",
+        "Medical residents",
+        "High-equity sellers",
+        "Luxury buyers"
+      ],
+      "future_questions_people_will_ask": [
+        "Should I live in Temple or Belton?",
+        "What neighborhoods are best for BSW physicians?",
+        "Is it better to buy or rent during residency?",
+        "How does Temple compare to Austin for medical professionals?"
+      ],
+      "time_horizon": "Immediate to Mid-Term (0-6 months)",
+      "confidence": 0.95,
+      "business_value_score": 100
+    },
+    {
+      "signal_name": "Fresh Content Development Priorities - 'Temple vs Austin for Medical Residents' and 'Best Neighborhoods Near BSW Temple'",
+      "source": "Daily Reports (2026-06-23 to 2026-06-25), Priority Report, Knowledge Review",
+      "signal_type": "Content Opportunity",
+      "summary": "Targeted content pieces focused on comparative relocation decisions between Temple and Austin for BSW medical staff, and hyper-local neighborhood guides near BSW Temple, are identified as highest priority to capture physician relocation lead flow and build mid/long-term pipelines.",
+      "why_it_matters": "This content supports Moody's position as the premier expert for BSW relocations, feeds SEO pipelines with high-intent search queries, and educates sellers and buyers to improve lead conversion rates.",
+      "affected_opportunities": [
+        "BSW / Physician Relocation",
+        "Belton Sellers",
+        "Move-Up Buyers",
+        "Luxury Buyers (doctor targeted)"
+      ],
+      "likely_client_types": [
+        "Physician relocation leads",
+        "Medical residents",
+        "High-income buyers",
+        "Local sellers in Belton"
+      ],
+      "future_questions_people_will_ask": [
+        "How do Temple and Austin compare for medical residents?",
+        "What are the best neighborhoods near BSW Temple?",
+        "Should I sell FSBO or use a Realtor in Belton?"
+      ],
+      "time_horizon": "Mid-Term (0-12 months)",
+      "confidence": 0.9,
+      "business_value_score": 95
+    },
+    {
+      "signal_name": "Consistent and Growing Seller Demand in Belton with FSBO Interest",
+      "source": "Daily Reports, Priority Report, Knowledge Reviews (Belton area)",
+      "signal_type": "Seller Intent / Market Activity",
+      "summary": "Stable local seller interest in Belton is confirmed, particularly from homeowners considering For Sale By Owner (FSBO) options. Educational content (FSBO vs Realtor) is underway to nurture seller intent and capture listing market share.",
+      "why_it_matters": "Seller education and engagement in Belton can convert stable demand into active listings, feeding Moody's listings pipeline and supporting transaction velocity in a key market segment.",
+      "affected_opportunities": [
+        "Belton Sellers",
+        "High-Equity Sellers",
+        "Move-Up Buyers"
+      ],
+      "likely_client_types": [
+        "Local homeowners in Belton",
+        "Motivated sellers",
+        "First-time and move-up sellers"
+      ],
+      "future_questions_people_will_ask": [
+        "Should I sell my home myself or use a Realtor?",
+        "What are current home values in Belton?",
+        "How to price my home for sale?"
+      ],
+      "time_horizon": "Immediate to Mid-Term (0-6 months)",
+      "confidence": 0.85,
+      "business_value_score": 90
+    },
+    {
+      "signal_name": "Steady Interest and Content-Driven Demand from BSW / Physician Relocation Segment",
+      "source": "Daily Reports, BSW Healthcare Intelligence Leading Indicator",
+      "signal_type": "Employer / Healthcare Demand",
+      "summary": "Steady physician relocation interest linked to Baylor Scott & White operations supports high-income buyer demand for housing around Temple and Belton, indicating continued mid and long-term transaction opportunities.",
+      "why_it_matters": "Physician relocation clients generally have high lifetime value, strong commission potential, and referral opportunities. Content and lead engagement aligned with BSW signals optimize future funnel strength.",
+      "affected_opportunities": [
+        "BSW / Physician Relocation",
+        "Luxury Buyers",
+        "Move-Up Buyers"
+      ],
+      "likely_client_types": [
+        "Physicians",
+        "Medical residents",
+        "Healthcare executives"
+      ],
+      "future_questions_people_will_ask": [
+        "What neighborhoods do BSW physicians prefer?",
+        "Is Temple a good place to raise a family?",
+        "What financing options are available for physicians?"
+      ],
+      "time_horizon": "Mid to Long-Term (3-24 months)",
+      "confidence": 0.9,
+      "business_value_score": 88
+    },
+    {
+      "signal_name": "Emerging Military PCS Demand from Fort Cavazos Officers & Families",
+      "source": "Growth & Development Intelligence, Military PCS Opportunity Playbooks",
+      "signal_type": "Military Relocation Demand",
+      "summary": "Fort Cavazos PCS military families, officers, and enlisted personnel represent a strategic but currently low-signal opportunity. Preparatory content and lead nurturing are underway to capture future PCS-related housing transactions.",
+      "why_it_matters": "Military relocations involve high urgency and large client lifetime value. Early engagement and targeted relocation resources can position Moody as a trusted expert before competitors, though current signal is low.",
+      "affected_opportunities": [
+        "Fort Cavazos PCS Officers",
+        "Fort Cavazos PCS Enlisted Families",
+        "Military Relocation"
+      ],
+      "likely_client_types": [
+        "Military officers relocating to Fort Cavazos",
+        "Enlisted military families",
+        "Military civilian employees"
+      ],
+      "future_questions_people_will_ask": [
+        "Where should we live near Fort Cavazos?",
+        "How does using a VA loan work?",
+        "What neighborhoods fit military families?"
+      ],
+      "time_horizon": "Mid to Long-Term (6-24 months)",
+      "confidence": 0.6,
+      "business_value_score": 85
+    },
+    {
+      "signal_name": "Belton Builder Activity and New Subdivision Developments",
+      "source": "Growth & Development Intelligence, Builder Activity Intelligence",
+      "signal_type": "New Construction / Builder Demand",
+      "summary": "Ongoing builder incentives and new subdivision activity in Belton indicate growing supply and future buyer demand. Monitoring builder land purchases, permit filings, and inventory trends reveals opportunities to educate buyers on build vs buy decisions.",
+      "why_it_matters": "New construction demand is a primary driver of transaction volume; builders' capital investments presage neighborhood popularity and future resale values, informing lead targeting and content creation.",
+      "affected_opportunities": [
+        "New Construction Buyers",
+        "Move-Up Buyers",
+        "Physician Relocation",
+        "Belton Sellers"
+      ],
+      "likely_client_types": [
+        "Homebuyers considering new builds",
+        "Growing families",
+        "Physician relocation buyers",
+        "Local sellers in adjacent communities"
+      ],
+      "future_questions_people_will_ask": [
+        "Should I buy new construction or resale?",
+        "Which builders are best in Belton?",
+        "Are there incentives available?"
+      ],
+      "time_horizon": "Near to Mid-Term (0-12 months)",
+      "confidence": 0.85,
+      "business_value_score": 87
+    },
+    {
+      "signal_name": "Sustained Demand and Content Engagement Around Belton Homes Under $400k",
+      "source": "Growth Report (2026-06-23)",
+      "signal_type": "Buyer Demand / SEO Engagement",
+      "summary": "SEO and social media engagement, especially on Instagram and Facebook, around Belton homes priced under $400,000, indicates a popular and active price segment attracting buyers and generating leads.",
+      "why_it_matters": "These postings and content with clear CTAs drive qualified leads who are motivated to transact in this price range, fitting a large buyer demographic and supporting steady transaction volume.",
+      "affected_opportunities": [
+        "First-Time Home Buyers",
+        "Move-Up Buyers",
+        "Belton Buyers"
+      ],
+      "likely_client_types": [
+        "First-time buyers",
+        "Growing families",
+        "Local low-to-mid income buyers"
+      ],
+      "future_questions_people_will_ask": [
+        "What homes are available under $400k in Belton?",
+        "Are there financing options for affordable homes?",
+        "What neighborhoods are most affordable?"
+      ],
+      "time_horizon": "Immediate to Mid-Term (0-6 months)",
+      "confidence": 0.8,
+      "business_value_score": 82
+    }
+  ]
+}
+```

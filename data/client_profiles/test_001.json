@@ -1,0 +1,82 @@
+{
+  "profile_id": "test_001",
+  "identity": {
+    "name": null,
+    "email": null,
+    "phone": null,
+    "preferred_contact": null,
+    "source": null,
+    "created_at": "2026-06-25T18:42:00.134724"
+  },
+  "opportunity": {
+    "category": null,
+    "subcategory": null,
+    "confidence": 0,
+    "priority": 0
+  },
+  "persona": null,
+  "household": {
+    "adults": null,
+    "children": null,
+    "pets": [],
+    "schools_matter": null,
+    "special_notes": null
+  },
+  "employment": {
+    "employer": "BSW",
+    "role": null,
+    "department": null,
+    "start_date": null,
+    "commute_importance": null
+  },
+  "financial": {
+    "budget": null,
+    "buy_or_rent": null,
+    "financing_type": null
+  },
+  "timeline": {
+    "move_timeline": null,
+    "urgency": null,
+    "long_term_intent": null
+  },
+  "lifestyle": {
+    "privacy": 0,
+    "lake_access": 0,
+    "luxury": 0,
+    "small_town": 0,
+    "walkability": 0,
+    "new_construction": 0,
+    "land": 0,
+    "investment": 0
+  },
+  "priorities": [],
+  "concerns": [],
+  "community_match": {
+    "recommended_areas": {},
+    "best_fit": null,
+    "reasoning": null
+  },
+  "relationship": {
+    "trust_score": 0,
+    "stage": "Discovery",
+    "last_contact": null,
+    "next_action": null
+  },
+  "revenue": {
+    "expected_commission": null,
+    "expected_relationship_value": null,
+    "referral_potential": null,
+    "roi_priority": null
+  },
+  "content_plan": {
+    "recommended_content": [],
+    "recommended_videos": [],
+    "sent_content": []
+  },
+  "crm": {
+    "fub_person_id": null,
+    "tags": [],
+    "notes": []
+  },
+  "raw_conversation": []
+}

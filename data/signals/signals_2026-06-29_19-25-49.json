@@ -1,0 +1,186 @@
+{
+  "generated_at": "2026-06-29T19:25:49.355943",
+  "signal_count": 7,
+  "signals": [
+    {
+      "signal_name": "Follow Up Boss Lead Engagement High Activity",
+      "source": "Follow Up Boss Lead Scoring and Engagement Data",
+      "signal_type": "Search Demand",
+      "summary": "Highly active web visitors and lead engagement scoring maximum (100) for users sourcing cash offers and multiple visits, indicating imminent buying or selling intent.",
+      "why_it_matters": "Active high-score leads such as Kelsie Livingston represent immediate transaction opportunities with high conversion potential if followed up quickly.",
+      "affected_opportunities": [
+        "Active Buyer Leads",
+        "Cash Offer Transactions"
+      ],
+      "likely_client_types": [
+        "Home Buyers",
+        "Home Sellers",
+        "Investors"
+      ],
+      "future_questions_people_will_ask": [
+        "How to source cash offers in Bell County?",
+        "When is the right time to sell in Belton?",
+        "What financing options help with quick purchases?"
+      ],
+      "time_horizon": "Immediate to Short Term",
+      "confidence": 0.95,
+      "business_value_score": 100,
+      "generated_at": "2026-06-29T19:25:31.200361"
+    },
+    {
+      "signal_name": "BSW / Physician Relocation Search Interest",
+      "source": "Google Search Console / SEO Reports",
+      "signal_type": "Search Demand",
+      "summary": "Consistent and steady high interest in searches related to Baylor Scott & White (BSW) medical professional relocation, especially involving Temple vs Austin comparisons and neighborhood guides near BSW Temple.",
+      "why_it_matters": "Physician relocations represent a stable and high-value buyer pool seeking housing near BSW Temple, supporting targeted content strategies and lead nurturing to capture these clients.",
+      "affected_opportunities": [
+        "Physician Relocation Leads",
+        "Temple Market Growth",
+        "Medical Professional Buyer Segments"
+      ],
+      "likely_client_types": [
+        "Physicians",
+        "Medical Residents",
+        "Healthcare Workers"
+      ],
+      "future_questions_people_will_ask": [
+        "Is Temple TX better than Austin for medical professionals?",
+        "What are the best neighborhoods near BSW Temple?",
+        "How does cost of living compare between Temple and Austin for doctors?"
+      ],
+      "time_horizon": "Mid to Long Term",
+      "confidence": 0.9,
+      "business_value_score": 100,
+      "generated_at": "2026-06-29T19:25:31.200361"
+    },
+    {
+      "signal_name": "Belton Seller Search and FSBO Interest",
+      "source": "Google Search Console / SEO Reports",
+      "signal_type": "Search Demand",
+      "summary": "Stable and consistent demand for seller-related searches in Belton, notably interest in FSBO vs Realtor guides and market insights to educate local sellers.",
+      "why_it_matters": "Seller education content in Belton correlates with lead generation potential and conversion of local listings, addressing a growing seller market segment.",
+      "affected_opportunities": [
+        "Belton Seller Leads",
+        "FSBO Market Engagement"
+      ],
+      "likely_client_types": [
+        "Home Sellers",
+        "For Sale By Owner Homeowners",
+        "Realtors"
+      ],
+      "future_questions_people_will_ask": [
+        "Should I sell my home FSBO or with a realtor in Belton?",
+        "What are current market conditions for sellers in Belton?",
+        "How to price a home for sale in Belton?"
+      ],
+      "time_horizon": "Short to Mid Term",
+      "confidence": 0.85,
+      "business_value_score": 100,
+      "generated_at": "2026-06-29T19:25:31.200361"
+    },
+    {
+      "signal_name": "High-Intent Follow Up Boss Leads Detected",
+      "source": "Follow Up Boss API",
+      "signal_type": "Lead Activity",
+      "summary": "Detected 21 high-intent leads. Top leads: Khalil Hale, Crystal Rymer, Mischa Quinn, Deborah Viramontes, LISA DUBOS.",
+      "why_it_matters": "These leads may represent immediate revenue opportunities. They should be prioritized because they are already in Moody's pipeline.",
+      "affected_opportunities": [
+        "Local Home Sellers",
+        "Move-Up Buyers",
+        "High-Equity Homeowners",
+        "BSW / Physician Relocation"
+      ],
+      "likely_client_types": [
+        "Motivated sellers",
+        "Cash offer leads",
+        "Relocation buyers",
+        "High-intent prospects"
+      ],
+      "future_questions_people_will_ask": [
+        "What is my home worth?",
+        "Should I sell now?",
+        "What are my options?",
+        "Who can help me move quickly?"
+      ],
+      "time_horizon": "Immediate",
+      "confidence": 0.9,
+      "business_value_score": 95,
+      "generated_at": "2026-06-29T19:25:31.719520"
+    },
+    {
+      "signal_name": "Belton Homes Under $400k SEO and Social Media Engagement",
+      "source": "SEO and Social Media Growth Reports",
+      "signal_type": "Search Demand",
+      "summary": "Engaged social media and SEO interest around Belton homes priced below $400k, showing promising CTR and interactions on Instagram, Facebook, and related posts.",
+      "why_it_matters": "Lower price-point home searches with high engagement reflect a strong buyer interest segment that can be nurtured with tailored calls-to-action and social campaigns.",
+      "affected_opportunities": [
+        "First-Time Buyer Leads",
+        "Belton Entry-Level Market"
+      ],
+      "likely_client_types": [
+        "First-Time Buyers",
+        "Budget-Conscious Buyers",
+        "Young Families"
+      ],
+      "future_questions_people_will_ask": [
+        "What are good affordable homes in Belton under $400k?",
+        "How to apply for first-time buyer programs in Belton?",
+        "Are there new constructions available in Belton under $400k?"
+      ],
+      "time_horizon": "Short Term",
+      "confidence": 0.78,
+      "business_value_score": 85,
+      "generated_at": "2026-06-29T19:25:31.200361"
+    },
+    {
+      "signal_name": "Temple vs Belton Buyer Comparison Searches",
+      "source": "Content Priorities and SEO Interest Trends",
+      "signal_type": "Search Demand",
+      "summary": "Growing interest in comparative content evaluating Temple versus Belton for home buyers, particularly medical professionals and first-time buyers.",
+      "why_it_matters": "Comparative searches signal active buyer decision-making in the Bell County region and help guide location-based marketing and content development.",
+      "affected_opportunities": [
+        "Temple Buyer Leads",
+        "Belton Buyer Leads"
+      ],
+      "likely_client_types": [
+        "First-Time Buyers",
+        "Medical Professionals",
+        "Relocating Families"
+      ],
+      "future_questions_people_will_ask": [
+        "Is Temple or Belton better for first-time buyers?",
+        "What are property tax differences between Temple and Belton?",
+        "Which city offers better new construction options?"
+      ],
+      "time_horizon": "Short to Mid Term",
+      "confidence": 0.75,
+      "business_value_score": 40,
+      "generated_at": "2026-06-29T19:25:31.200361"
+    },
+    {
+      "signal_name": "Emerging Military PCS and Fort Cavazos Housing Searches",
+      "source": "Watchlist Demand Streams",
+      "signal_type": "Search Demand",
+      "summary": "Initial monitoring and preparation for demand from military personnel relocating through Fort Cavazos PCS moves, with anticipated growth in military family housing searches.",
+      "why_it_matters": "Military PCS relocation represents a significant future demand stream requiring tailored housing guides and lead capture strategies.",
+      "affected_opportunities": [
+        "Military Relocation Leads",
+        "Fort Cavazos Housing Market"
+      ],
+      "likely_client_types": [
+        "Military Families",
+        "PCS Transferees",
+        "Military Investors"
+      ],
+      "future_questions_people_will_ask": [
+        "What are the best homes near Fort Cavazos?",
+        "How to find military relocation housing?",
+        "What are property tax implications for PCS moves?"
+      ],
+      "time_horizon": "Mid Term",
+      "confidence": 0.6,
+      "business_value_score": 0,
+      "generated_at": "2026-06-29T19:25:31.200361"
+    }
+  ]
+}

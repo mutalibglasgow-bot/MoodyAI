@@ -1,0 +1,321 @@
+{
+  "generated_at": "2026-07-02T12:23:24.897859",
+  "signal_count": 12,
+  "signals": [
+    {
+      "signal_name": "Follow Up Boss Lead Activity",
+      "source": "Lead Platform Data",
+      "signal_type": "Search Demand / Lead Intent",
+      "summary": "Follow Up Boss leads show high and steady engagement with active buyer and seller intent, specifically with leads like Kelsie Livingston actively sourcing cash offers and multiple consult touches. Lead scores remain high and stable.",
+      "why_it_matters": "High lead engagement is a direct predictor of imminent transactions and revenue; priority outreach to these leads preserves and converts demand.",
+      "affected_opportunities": [
+        "Immediate sales conversions",
+        "Lead nurturing workflows",
+        "Cash offer sourcing clients"
+      ],
+      "likely_client_types": [
+        "Active buyers and motivated sellers",
+        "Cash buyers",
+        "Real estate investors"
+      ],
+      "future_questions_people_will_ask": [
+        "How to find cash buying opportunities?",
+        "Who are the most active buyers in Bell County?",
+        "What are best strategies to convert hot leads?"
+      ],
+      "time_horizon": "Immediate (days to weeks)",
+      "confidence": 0.95,
+      "business_value_score": 100,
+      "generated_at": "2026-07-02T12:22:36.280133"
+    },
+    {
+      "signal_name": "BSW Healthcare Hiring Activity Detected",
+      "source": "BSW Careers / BSW Job Sources",
+      "signal_type": "Healthcare Employment",
+      "summary": "Detected 8 BSW-related healthcare hiring signals. Physician/surgeon signals: 7. Specialty signals: 0. Executive/leadership signals: 0. Examples: Physicians | Baylor Scott & White Health; When you join the more than 7,800 affiliated physicians of Baylor Scott & White Health, you\u2019ll be part of a healthcare system that serves approximately two-thirds of Texas. We\u2019re the largest not-for-profit provider in the state, with 52 hospitals and more than 800 patient care sites!; Each of our physicians brings their own unique contributions and voice to our Baylor Scott & White Health family. Yet we are all united in the belief that the patient is the center of everything we do. And that we\u2019re part of an inclusive culture and a mission that\u2019s larger than our own individual practices; in a faith-based system, medicine is driven by servanthood, a devotion to helping those in need. \u200b\u200b\u200b\u200b\u200b\u200b\u200b; \u201cAs a Baylor Scott & White Health physician, I am lucky to be surrounded by so many dedicated, talented professionals. We treat such a wide range of cases, including rare and acute situations, that we have to rely on each other in all kinds of ways. And so, the quality of the people I work with makes all the difference.\u201d; Baylor Scott & White Health Central Texas Division Physician and Advanced Practitioner Job Openings - Powered by PracticeMatch; The system now includes 48 hospitals, more than 1,000 access points, 5,500 active physicians, and 44,000 employees, plus the Scott & White Health Plan, Baylor Scott & White Research Institute and Baylor Scott & White Quality Alliance \u2014 a network of clinical providers and facilities focused on improving quality, managing the health of patient populations, and reducing the overall cost of care. For more information visit: BSWHealth.com.; Colorectal Surgeon, Waco; Adult Psychiatrist - Onsite in Temple, Texas",
+      "why_it_matters": "BSW healthcare hiring can predict future relocation demand from physicians, specialists, nurses, executives, and healthcare families. These clients often need neighborhood guidance, commute analysis, school/lifestyle advice, and high-trust relocation support before they contact a Realtor.",
+      "affected_opportunities": [
+        "BSW Attending Physicians",
+        "BSW Residents & Fellows",
+        "High-Income Healthcare Professionals",
+        "Executive Corporate Relocations",
+        "Luxury Home Buyers",
+        "Belton Sellers"
+      ],
+      "likely_client_types": [
+        "Attending physicians",
+        "Medical specialists",
+        "Healthcare executives",
+        "Nurses and advanced practice providers",
+        "Relocating healthcare families"
+      ],
+      "future_questions_people_will_ask": [
+        "Where should I live if I work at BSW Temple?",
+        "Is Belton or Temple better for BSW physicians?",
+        "What neighborhoods are best near BSW?",
+        "Should I buy or rent first?",
+        "What is the commute to BSW?",
+        "What schools and lifestyle options should we consider?"
+      ],
+      "time_horizon": "30-180 days",
+      "confidence": 0.85,
+      "business_value_score": 100,
+      "generated_at": "2026-07-02T12:23:24.897537"
+    },
+    {
+      "signal_name": "High-Intent Follow Up Boss Leads Detected",
+      "source": "Follow Up Boss API",
+      "signal_type": "Lead Activity",
+      "summary": "Detected 21 high-intent leads. Top leads: Khalil Hale, Crystal Rymer, Mischa Quinn, Deborah Viramontes, LISA DUBOS.",
+      "why_it_matters": "These leads may represent immediate revenue opportunities. They should be prioritized because they are already in Moody's pipeline.",
+      "affected_opportunities": [
+        "Local Home Sellers",
+        "Move-Up Buyers",
+        "High-Equity Homeowners",
+        "BSW / Physician Relocation"
+      ],
+      "likely_client_types": [
+        "Motivated sellers",
+        "Cash offer leads",
+        "Relocation buyers",
+        "High-intent prospects"
+      ],
+      "future_questions_people_will_ask": [
+        "What is my home worth?",
+        "Should I sell now?",
+        "What are my options?",
+        "Who can help me move quickly?"
+      ],
+      "time_horizon": "Immediate",
+      "confidence": 0.9,
+      "business_value_score": 95,
+      "generated_at": "2026-07-02T12:22:36.808516"
+    },
+    {
+      "signal_name": "BSW / Physician Relocation Searches",
+      "source": "Google Search Console / SEO Reports",
+      "signal_type": "Search Demand",
+      "summary": "Steady interest in searches related to Baylor Scott & White (BSW) medical professionals relocating, particularly content focused on 'Temple vs Austin for Medical Residents' and 'Best Neighborhoods Near BSW Temple'. High priority content targets physician relocation queries including commute times, housing options, and lifestyle.",
+      "why_it_matters": "Physician relocation searches indicate a specialized, high-intent buyer demographic with predictable housing needs, creating a valuable funnel for mid-to-long-term client acquisition.",
+      "affected_opportunities": [
+        "Physician relocation lead generation",
+        "Specialized BSW medical professional marketing",
+        "Neighborhood guides targeting medical staff"
+      ],
+      "likely_client_types": [
+        "Medical professionals relocating to Bell County",
+        "BSW employees seeking residential properties",
+        "Investor agents specializing in healthcare employee housing"
+      ],
+      "future_questions_people_will_ask": [
+        "How does Temple compare to Austin for BSW medical residents?",
+        "What are the best neighborhoods near BSW Temple?",
+        "What is the cost of living for BSW physicians in Temple vs Austin?"
+      ],
+      "time_horizon": "3-6 months",
+      "confidence": 0.9,
+      "business_value_score": 85,
+      "generated_at": "2026-07-02T12:22:36.280133"
+    },
+    {
+      "signal_name": "Belton Seller Searches",
+      "source": "Google Search Console / SEO Reports",
+      "signal_type": "Search Demand",
+      "summary": "Consistent SEO and lead platform signals indicate steady demand from sellers in Belton. Popular search themes include FSBO vs Realtor comparisons and local market conditions for sellers, especially around homes priced under $400k.",
+      "why_it_matters": "Seller education searches show motivation and intent to list; capturing this demand with targeted content can increase lead capture and listings in Belton.",
+      "affected_opportunities": [
+        "Belton FSBO vs Realtor educational content",
+        "Lead capture from motivated local sellers",
+        "Seller market education and conversion"
+      ],
+      "likely_client_types": [
+        "Homeowners in Belton considering selling",
+        "FSBO sellers evaluating options",
+        "Local agents focusing on listing growth"
+      ],
+      "future_questions_people_will_ask": [
+        "Should I sell my Belton home FSBO or use a Realtor?",
+        "What are current market trends for Belton homes under $400k?",
+        "How to price a home for sale in Belton?"
+      ],
+      "time_horizon": "Immediate to 3 months",
+      "confidence": 0.85,
+      "business_value_score": 80,
+      "generated_at": "2026-07-02T12:22:36.280133"
+    },
+    {
+      "signal_name": "FSBO Searches in Belton",
+      "source": "SEO / Content Reports",
+      "signal_type": "Search Demand",
+      "summary": "Growing interest in For Sale By Owner (FSBO) searches in Belton with a focus on comparison vs Realtor listings, selling strategies, and market insights.",
+      "why_it_matters": "FSBO search demand reveals motivated sellers looking for alternatives to traditional agents, representing an opportunity for lead capture through education and consultation.",
+      "affected_opportunities": [
+        "FSBO vs Realtor educational guides",
+        "Seller outreach and conversion",
+        "Tools and resources for FSBO sellers"
+      ],
+      "likely_client_types": [
+        "Belton homeowners wanting to sell independently",
+        "Agents targeting FSBO conversion",
+        "Real estate educators and coaches"
+      ],
+      "future_questions_people_will_ask": [
+        "What are the pros and cons of selling FSBO in Belton?",
+        "How do FSBO homes perform in the Bell County market?",
+        "What are effective FSBO marketing strategies?"
+      ],
+      "time_horizon": "Immediate to 3 months",
+      "confidence": 0.85,
+      "business_value_score": 75,
+      "generated_at": "2026-07-02T12:22:36.280133"
+    },
+    {
+      "signal_name": "First-Time Buyer Searches",
+      "source": "Lead / SEO Data",
+      "signal_type": "Search Demand",
+      "summary": "Steady but lower volume of first-time buyer searches, often interlinked with Temple vs Belton comparisons and new construction interest. Some social media postings suggest growing engagement.",
+      "why_it_matters": "First-time buyers represent an ongoing demand segment that can be increased via targeted educational content and local market insights.",
+      "affected_opportunities": [
+        "Educational content for first-time buyers",
+        "New construction marketing",
+        "Loan and affordability guides"
+      ],
+      "likely_client_types": [
+        "First-time home buyers in Bell County",
+        "Young professionals",
+        "Families entering the market"
+      ],
+      "future_questions_people_will_ask": [
+        "How to buy my first home in Temple or Belton?",
+        "What new construction options exist for first-time buyers?",
+        "How do property taxes affect affordability?"
+      ],
+      "time_horizon": "3-6 months",
+      "confidence": 0.75,
+      "business_value_score": 70,
+      "generated_at": "2026-07-02T12:22:36.280133"
+    },
+    {
+      "signal_name": "Property Tax Searches",
+      "source": "SEO / Content Queries",
+      "signal_type": "Search Demand",
+      "summary": "Ongoing queries related to property tax comparisons especially between Temple and Belton, influencing buyer decision-making and affordability analysis.",
+      "why_it_matters": "Property tax concerns impact buyer perception and affordability, making it a critical content area to address to reduce friction in decision-making.",
+      "affected_opportunities": [
+        "Buyer education content",
+        "Comparative affordability guides",
+        "Tax impact calculators for buyers"
+      ],
+      "likely_client_types": [
+        "Buyers comparing Temple and Belton",
+        "Investors analyzing operating costs",
+        "First-time homebuyers assessing expenses"
+      ],
+      "future_questions_people_will_ask": [
+        "What are property tax rates in Temple vs Belton?",
+        "How do property taxes affect mortgage costs?",
+        "Are there tax exemptions for certain buyers in Bell County?"
+      ],
+      "time_horizon": "Immediate to 3 months",
+      "confidence": 0.8,
+      "business_value_score": 65,
+      "generated_at": "2026-07-02T12:22:36.280133"
+    },
+    {
+      "signal_name": "Temple vs Belton Buyer Searches",
+      "source": "SEO / Social Media Engagement",
+      "signal_type": "Search Demand",
+      "summary": "Steady but lower volume searches comparing Temple and Belton for buyers, with content focused on cost, lifestyle, and new construction. Social media engagement on these topics is moderate but growing.",
+      "why_it_matters": "Understanding buyer preferences between these neighboring markets can guide tailored marketing and listings focus, capturing emerging demand.",
+      "affected_opportunities": [
+        "Localized buyer targeting",
+        "New construction sales strategies",
+        "Content marketing on comparative analysis"
+      ],
+      "likely_client_types": [
+        "First-time buyers evaluating Temple vs Belton",
+        "Investors comparing area growth",
+        "New home shoppers seeking community data"
+      ],
+      "future_questions_people_will_ask": [
+        "Is Temple or Belton better for first-time buyers?",
+        "How do property taxes compare between Temple and Belton?",
+        "What new construction is available in each area?"
+      ],
+      "time_horizon": "3-6 months",
+      "confidence": 0.7,
+      "business_value_score": 60,
+      "generated_at": "2026-07-02T12:22:36.280133"
+    },
+    {
+      "signal_name": "New Construction Searches",
+      "source": "Watchlist / SEO Reports",
+      "signal_type": "Search Demand",
+      "summary": "Watchlisted as a growing demand stream, particularly in Temple, with search interest tied to price points and first-time buyer segments. No major spikes yet but steady interest in new builds.",
+      "why_it_matters": "New construction appeals to specific buyer niches including first-timers and growing families. Early content positioning can capture leads at consideration stage.",
+      "affected_opportunities": [
+        "New construction community guides",
+        "Builder and development lead capture",
+        "Pricing and availability content"
+      ],
+      "likely_client_types": [
+        "Buyers seeking new homes",
+        "Developers marketing to Bell County buyers",
+        "First-time and move-up buyers"
+      ],
+      "future_questions_people_will_ask": [
+        "What new construction is available in Temple and Belton?",
+        "How do new construction prices compare to existing homes?",
+        "Are there incentives or builder promotions?"
+      ],
+      "time_horizon": "3-6 months",
+      "confidence": 0.7,
+      "business_value_score": 60,
+      "generated_at": "2026-07-02T12:22:36.280133"
+    },
+    {
+      "signal_name": "Fort Cavazos / Military PCS Searches",
+      "source": "SEO Demand Watchlist",
+      "signal_type": "Emerging Search Demand",
+      "summary": "Early monitoring of Fort Cavazos military Permanent Change of Station (PCS) relocation searches, with plans to create PCS housing guides. Current search volume is low but expected to rise with base activity.",
+      "why_it_matters": "Military relocations can provide a steady pipeline of demand for family and rental housing; early content development can position the brand for future capture.",
+      "affected_opportunities": [
+        "Military relocation lead generation",
+        "PCS housing and rental guides",
+        "Military family support content"
+      ],
+      "likely_client_types": [
+        "Military personnel and families relocating",
+        "Military real estate specialists",
+        "Extended stay rental market"
+      ],
+      "future_questions_people_will_ask": [
+        "What housing options are near Fort Cavazos?",
+        "How to buy or rent near Fort Cavazos PCS?",
+        "What are best neighborhoods for military families?"
+      ],
+      "time_horizon": "6-12 months",
+      "confidence": 0.5,
+      "business_value_score": 50,
+      "generated_at": "2026-07-02T12:22:36.280133"
+    },
+    {
+      "signal_name": "Luxury and Lake Belton Searches",
+      "source": "SEO / Social Media Reports",
+      "signal_type": "Search Demand",
+      "summary": "Currently no significant trend shifts or strong search volume in luxury or Lake Belton property searches. Prior reports show zero scores for luxury and lake-related searches.",
+      "why_it_matters": "Lack of signal indicates minimal current demand, so efforts here can be deprioritized until future signals emerge.",
+      "affected_opportunities": [],
+      "likely_client_types": [],
+      "future_questions_people_will_ask": [
+        "What luxury homes are available near Lake Belton?",
+        "How does lakefront property pricing fluctuate?",
+        "Are there new construction luxury properties in Bell County?"
+      ],
+      "time_horizon": "Not immediate",
+      "confidence": 0.1,
+      "business_value_score": 0,
+      "generated_at": "2026-07-02T12:22:36.280133"
+    }
+  ]
+}

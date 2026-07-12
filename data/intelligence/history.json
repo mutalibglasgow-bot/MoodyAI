@@ -1,0 +1,62 @@
+[
+  {
+    "date": "2026-06-23",
+    "topic_scores": {
+      "Follow Up Boss": 1030,
+      "General Real Estate": 185,
+      "BSW / Physician Relocation": 135,
+      "Belton Sellers": 125,
+      "Temple Buyers": 40,
+      "Fort Cavazos / Military PCS": 0,
+      "Lake / Luxury": 0
+    }
+  },
+  {
+    "date": "2026-06-24",
+    "topic_scores": {
+      "Follow Up Boss": 1030,
+      "General Real Estate": 185,
+      "BSW / Physician Relocation": 135,
+      "Belton Sellers": 125,
+      "Temple Buyers": 40,
+      "Fort Cavazos / Military PCS": 0,
+      "Lake / Luxury": 0
+    }
+  },
+  {
+    "date": "2026-06-25",
+    "topic_scores": {
+      "Follow Up Boss": 1030,
+      "General Real Estate": 185,
+      "BSW / Physician Relocation": 135,
+      "Belton Sellers": 125,
+      "Temple Buyers": 40,
+      "Fort Cavazos / Military PCS": 0,
+      "Lake / Luxury": 0
+    }
+  },
+  {
+    "date": "2026-07-10",
+    "topic_scores": {
+      "Follow Up Boss": 1220,
+      "BSW / Physician Relocation": 270,
+      "Belton Sellers": 95,
+      "General Real Estate": 235,
+      "Temple Buyers": 110,
+      "Fort Cavazos / Military PCS": 50,
+      "Lake / Luxury": 0
+    }
+  },
+  {
+    "date": "2026-07-12",
+    "topic_scores": {
+      "Follow Up Boss": 1130,
+      "BSW / Physician Relocation": 280,
+      "Belton Sellers": 190,
+      "Temple Buyers": 110,
+      "General Real Estate": 215,
+      "Fort Cavazos / Military PCS": 50,
+      "Lake / Luxury": 0
+    }
+  }
+]

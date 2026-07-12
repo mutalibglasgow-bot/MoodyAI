@@ -1,0 +1,69 @@
+BELL COUNTY ZIP PRICE APPRECIATION MODEL
+============================================================
+
+Dependent variable: zhvi_12mo_change
+Observation count: 8145
+ZIP codes included: 76502, 76504, 76513, 76542, 76543, 76548, 76549, 76559, 76571
+Date range: 2008-12-31 to 2026-05-31
+
+R-squared: 0.5936
+Adjusted R-squared: 0.5934
+
+COEFFICIENTS
+------------------------------------------------------------
+const
+  coefficient: -0.061828
+  p-value: 0.000000
+
+mortgage_30yr_lag_12
+  coefficient: -0.008198
+  p-value: 0.000000
+  interpretation: mortgage_30yr_lag_12: negative relationship — higher values are associated with lower 12-month home price appreciation.
+
+fed_funds_rate_lag_12
+  coefficient: -0.006643
+  p-value: 0.000000
+  interpretation: fed_funds_rate_lag_12: negative relationship — higher values are associated with lower 12-month home price appreciation.
+
+unemployment_rate_lag_12
+  coefficient: -0.001162
+  p-value: 0.000000
+  interpretation: unemployment_rate_lag_12: negative relationship — higher values are associated with lower 12-month home price appreciation.
+
+cpi_lag_12
+  coefficient: 0.000480
+  p-value: 0.000000
+  interpretation: cpi_lag_12: positive relationship — higher values are associated with higher 12-month home price appreciation.
+
+RAW STATSMODELS SUMMARY
+------------------------------------------------------------
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:       zhvi_12mo_change   R-squared:                       0.594
+Model:                            OLS   Adj. R-squared:                  0.593
+Method:                 Least Squares   F-statistic:                     1979.
+Date:                Fri, 10 Jul 2026   Prob (F-statistic):               0.00
+Time:                        19:56:35   Log-Likelihood:                 24996.
+No. Observations:                8145   AIC:                        -4.998e+04
+Df Residuals:                    8140   BIC:                        -4.995e+04
+Df Model:                           4                                         
+Covariance Type:                  HC3                                         
+============================================================================================
+                               coef    std err          z      P>|z|      [0.025      0.975]
+--------------------------------------------------------------------------------------------
+const                       -0.0618      0.003    -23.926      0.000      -0.067      -0.057
+mortgage_30yr_lag_12        -0.0082      0.000    -36.391      0.000      -0.009      -0.008
+fed_funds_rate_lag_12       -0.0066      0.000    -25.353      0.000      -0.007      -0.006
+unemployment_rate_lag_12    -0.0012   7.56e-05    -15.370      0.000      -0.001      -0.001
+cpi_lag_12                   0.0005   9.99e-06     48.046      0.000       0.000       0.000
+==============================================================================
+Omnibus:                      375.867   Durbin-Watson:                   0.202
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              431.713
+Skew:                           0.536   Prob(JB):                     1.80e-94
+Kurtosis:                       3.350   Cond. No.                     4.51e+03
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC3)
+[2] The condition number is large, 4.51e+03. This might indicate that there are
+strong multicollinearity or other numerical problems.

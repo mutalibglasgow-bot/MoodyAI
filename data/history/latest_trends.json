@@ -1,0 +1,65 @@
+{
+  "generated_at": "2026-07-02T18:17:52.090381",
+  "trends": [
+    {
+      "sensor_name": "Follow Up Boss Sensor",
+      "latest_date": "2026-07-02",
+      "latest_signal_count": 1,
+      "latest_average_score": 95.0,
+      "yesterday_signal_count": null,
+      "yesterday_average_score": null,
+      "one_day_signal_change_percent": null,
+      "one_day_score_change_percent": null,
+      "seven_day_average_signal_count": 1.0,
+      "thirty_day_average_signal_count": 1.0,
+      "seven_day_average_score": 95.0,
+      "thirty_day_average_score": 95.0,
+      "momentum": "Stable"
+    },
+    {
+      "sensor_name": "Search Console Sensor",
+      "latest_date": "2026-07-02",
+      "latest_signal_count": 8,
+      "latest_average_score": 62.5,
+      "yesterday_signal_count": null,
+      "yesterday_average_score": null,
+      "one_day_signal_change_percent": null,
+      "one_day_score_change_percent": null,
+      "seven_day_average_signal_count": 8.0,
+      "thirty_day_average_signal_count": 8.0,
+      "seven_day_average_score": 62.5,
+      "thirty_day_average_score": 62.5,
+      "momentum": "Stable"
+    },
+    {
+      "sensor_name": "BSW Healthcare Sensor",
+      "latest_date": "2026-07-02",
+      "latest_signal_count": 1,
+      "latest_average_score": 100.0,
+      "yesterday_signal_count": null,
+      "yesterday_average_score": null,
+      "one_day_signal_change_percent": null,
+      "one_day_score_change_percent": null,
+      "seven_day_average_signal_count": 1.0,
+      "thirty_day_average_signal_count": 1.0,
+      "seven_day_average_score": 100.0,
+      "thirty_day_average_score": 100.0,
+      "momentum": "Stable"
+    },
+    {
+      "sensor_name": "Temple EDC / Growth Sensor",
+      "latest_date": "2026-07-02",
+      "latest_signal_count": 1,
+      "latest_average_score": 100.0,
+      "yesterday_signal_count": null,
+      "yesterday_average_score": null,
+      "one_day_signal_change_percent": null,
+      "one_day_score_change_percent": null,
+      "seven_day_average_signal_count": 1.0,
+      "thirty_day_average_signal_count": 1.0,
+      "seven_day_average_score": 100.0,
+      "thirty_day_average_score": 100.0,
+      "momentum": "Stable"
+    }
+  ]
+}

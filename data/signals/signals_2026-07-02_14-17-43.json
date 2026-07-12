@@ -1,0 +1,263 @@
+{
+  "generated_at": "2026-07-02T14:17:43.430680",
+  "signal_count": 10,
+  "signals": [
+    {
+      "signal_name": "Follow Up Boss Active Lead Search Behavior",
+      "source": "Internal Lead Scoring / SEO Reports",
+      "signal_type": "Lead Engagement Signal",
+      "summary": "High and steady lead scores with multiple site visits and active intent in Follow Up Boss platform, particularly from leads sourcing cash offers like Kelsie Livingston, Deborah Viramontes, and Whitney Shawlewis.",
+      "why_it_matters": "Strong immediate buying and selling intent signals indicate imminent transactions, making these leads priority targets for conversion.",
+      "affected_opportunities": [
+        "Active lead conversion",
+        "Cash offer sourcing"
+      ],
+      "likely_client_types": [
+        "Serious buyers sourcing cash offers",
+        "Motivated sellers"
+      ],
+      "future_questions_people_will_ask": [
+        "How to structure cash offer transactions",
+        "Where to find homes available for cash buyers"
+      ],
+      "time_horizon": "Immediate (days)",
+      "confidence": 0.98,
+      "business_value_score": 100,
+      "generated_at": "2026-07-02T14:17:13.467929"
+    },
+    {
+      "signal_name": "BSW / Physician Relocation Search Interest",
+      "source": "Google Search Console / SEO Reports",
+      "signal_type": "Search Demand",
+      "summary": "Consistent and steady search interest around Baylor Scott & White (BSW) physician relocation topics, especially comparing Temple vs Austin for medical residents and neighborhood guides near BSW Temple.",
+      "why_it_matters": "Physician relocation queries indicate a strong future buyer pool among medical professionals moving for employment, providing high-value and specialized client leads.",
+      "affected_opportunities": [
+        "Physician relocation content marketing",
+        "Follow Up Boss lead nurturing for medical professionals"
+      ],
+      "likely_client_types": [
+        "Physicians and medical staff",
+        "Healthcare relocating families"
+      ],
+      "future_questions_people_will_ask": [
+        "Temple vs Austin for medical residents",
+        "Best neighborhoods near BSW Temple",
+        "BSW Temple physician salary and benefits"
+      ],
+      "time_horizon": "Mid to long term (weeks to months)",
+      "confidence": 0.95,
+      "business_value_score": 100,
+      "generated_at": "2026-07-02T14:17:13.467929"
+    },
+    {
+      "signal_name": "Belton Seller Search Demand",
+      "source": "Google Search Console / SEO Reports",
+      "signal_type": "Search Demand",
+      "summary": "Stable and consistent search volume for seller-related topics in Belton, including FSBO searches and comparisons of FSBO vs Realtor selling approaches.",
+      "why_it_matters": "Belton seller intent signals represent a growing opportunity for listing acquisitions and require targeted educational content to convert leads.",
+      "affected_opportunities": [
+        "Belton FSBO vs Realtor guide content",
+        "Seller lead capture in Belton"
+      ],
+      "likely_client_types": [
+        "Homeowners in Belton preparing to sell",
+        "FSBO sellers weighing options"
+      ],
+      "future_questions_people_will_ask": [
+        "How to sell a home FSBO in Belton",
+        "Benefits of Realtors vs FSBO in Belton",
+        "Belton home market conditions"
+      ],
+      "time_horizon": "Short to medium term (days to weeks)",
+      "confidence": 0.9,
+      "business_value_score": 100,
+      "generated_at": "2026-07-02T14:17:13.467929"
+    },
+    {
+      "signal_name": "BSW Healthcare Hiring Demand Classified",
+      "source": "BSW Careers / BSW Job Sources",
+      "signal_type": "Healthcare Employment",
+      "summary": "Detected 52 classified BSW healthcare hiring signals. Role mix: Attending Physician / Specialist: 37; Surgeon / High-Income Specialist: 4; Healthcare Recruiting Signal: 9; Advanced Practice Provider: 1; Healthcare Executive / Leadership: 1. Estimated relocations: 32.3. Estimated housing demand range: $16,845,000 - $40,762,500. Examples: Physicians; Esther H., Cardiothoracic Surgeon; In-house Recruiters; Featured Recruiters; Senior Physician Recruiter; APP Recruiter; Recruiters; Additional Recruiters",
+      "why_it_matters": "BSW healthcare hiring is a leading indicator of future relocation demand. Physicians, specialists, healthcare executives, advanced practice providers, and clinical staff create housing demand before they begin searching for a Realtor.",
+      "affected_opportunities": [
+        "BSW Attending Physicians",
+        "BSW Residents & Fellows",
+        "High-Income Healthcare Professionals",
+        "Executive Corporate Relocations",
+        "Luxury Home Buyers",
+        "Move-Up Buyers",
+        "Belton Sellers"
+      ],
+      "likely_client_types": [
+        "Attending physicians",
+        "Surgeons",
+        "Medical specialists",
+        "Healthcare executives",
+        "Advanced practice providers",
+        "Relocating healthcare families"
+      ],
+      "future_questions_people_will_ask": [
+        "Where should I live if I work at BSW Temple?",
+        "Is Belton or Temple better for BSW physicians?",
+        "What neighborhoods are best near BSW?",
+        "Should I buy or rent first?",
+        "What is the commute to BSW?",
+        "What schools and lifestyle options should we consider?",
+        "What physician mortgage options are available?"
+      ],
+      "time_horizon": "30-180 days",
+      "confidence": 0.9,
+      "business_value_score": 100,
+      "generated_at": "2026-07-02T14:17:43.430424"
+    },
+    {
+      "signal_name": "High-Intent Follow Up Boss Leads Detected",
+      "source": "Follow Up Boss API",
+      "signal_type": "Lead Activity",
+      "summary": "Detected 21 high-intent leads. Top leads: Khalil Hale, Crystal Rymer, Mischa Quinn, Deborah Viramontes, LISA DUBOS.",
+      "why_it_matters": "These leads may represent immediate revenue opportunities. They should be prioritized because they are already in Moody's pipeline.",
+      "affected_opportunities": [
+        "Local Home Sellers",
+        "Move-Up Buyers",
+        "High-Equity Homeowners",
+        "BSW / Physician Relocation"
+      ],
+      "likely_client_types": [
+        "Motivated sellers",
+        "Cash offer leads",
+        "Relocation buyers",
+        "High-intent prospects"
+      ],
+      "future_questions_people_will_ask": [
+        "What is my home worth?",
+        "Should I sell now?",
+        "What are my options?",
+        "Who can help me move quickly?"
+      ],
+      "time_horizon": "Immediate",
+      "confidence": 0.9,
+      "business_value_score": 95,
+      "generated_at": "2026-07-02T14:17:14.014410"
+    },
+    {
+      "signal_name": "Temple vs Belton Buyer Search Comparisons",
+      "source": "SEO Content Interest / Social Media Engagement",
+      "signal_type": "Comparative Search Demand",
+      "summary": "Emerging and steady searches comparing Temple and Belton home buying markets, including affordability, neighborhood preferences, and new construction opportunities.",
+      "why_it_matters": "Comparative buyer searches can direct lead acquisition strategies and help tailor content and listings to specific buyer preferences in the region.",
+      "affected_opportunities": [
+        "Buyer education content",
+        "Localized listing marketing"
+      ],
+      "likely_client_types": [
+        "First-time buyers evaluating local options",
+        "Relocators comparing nearby towns"
+      ],
+      "future_questions_people_will_ask": [
+        "Temple vs Belton cost of living",
+        "Best neighborhoods for families Temple vs Belton",
+        "New construction options in Temple vs Belton"
+      ],
+      "time_horizon": "Short to medium term",
+      "confidence": 0.85,
+      "business_value_score": 40,
+      "generated_at": "2026-07-02T14:17:13.467929"
+    },
+    {
+      "signal_name": "First-Time Buyer and New Construction Search Signals",
+      "source": "Watchlist Observations",
+      "signal_type": "Emerging Buyer Demand",
+      "summary": "Early signals from buyer queries around new construction and first-time buyer programs in Temple and surrounding areas.",
+      "why_it_matters": "Targeting first-time buyers and new construction interest can broaden the lead funnel and address a critical demographic in the market.",
+      "affected_opportunities": [
+        "First-time buyer educational content",
+        "New construction development collaborations"
+      ],
+      "likely_client_types": [
+        "First-time homebuyers",
+        "New construction market entrants"
+      ],
+      "future_questions_people_will_ask": [
+        "New construction homes Temple TX",
+        "First-time homebuyer assistance Bell County",
+        "Cost and benefits of new homes"
+      ],
+      "time_horizon": "Medium term",
+      "confidence": 0.7,
+      "business_value_score": 40,
+      "generated_at": "2026-07-02T14:17:13.467929"
+    },
+    {
+      "signal_name": "Property Tax Search Demand",
+      "source": "SEO and Local Market Awareness",
+      "signal_type": "Informational Demand",
+      "summary": "Search interest around property tax rates and implications in Bell County including Temple and Belton areas for buyers and sellers.",
+      "why_it_matters": "Property tax concerns affect buying decisions and affordability planning, influencing demand and negotiation strategies.",
+      "affected_opportunities": [
+        "Property tax informational content",
+        "Buyer and seller consultation services"
+      ],
+      "likely_client_types": [
+        "Buyers evaluating affordability",
+        "Sellers pricing homes"
+      ],
+      "future_questions_people_will_ask": [
+        "Bell County property tax rates",
+        "How property taxes affect home prices Temple/Belton",
+        "Tax exemptions for homeowners"
+      ],
+      "time_horizon": "Ongoing",
+      "confidence": 0.75,
+      "business_value_score": 30,
+      "generated_at": "2026-07-02T14:17:13.467929"
+    },
+    {
+      "signal_name": "Fort Cavazos / Military PCS Housing Search Interest",
+      "source": "Demand Watchlist and SEO Trends",
+      "signal_type": "Emerging Search Demand",
+      "summary": "Increasing early-stage search signals related to Fort Cavazos military PCS (Permanent Change of Station) relocations, though currently low volume, showing potential growth opportunities.",
+      "why_it_matters": "Capturing military-to-civilian or PCS-based real estate demand early can position the business for future client acquisition from military families needing housing.",
+      "affected_opportunities": [
+        "Military PCS housing guides",
+        "Targeted military relocation marketing"
+      ],
+      "likely_client_types": [
+        "Active duty military personnel relocating",
+        "Military families"
+      ],
+      "future_questions_people_will_ask": [
+        "Best housing near Fort Cavazos",
+        "Fort Cavazos PCS housing tips",
+        "Military relocation assistance in Bell County"
+      ],
+      "time_horizon": "Medium to long term",
+      "confidence": 0.6,
+      "business_value_score": 0,
+      "generated_at": "2026-07-02T14:17:13.467929"
+    },
+    {
+      "signal_name": "Luxury and Lake Belton Search Demand",
+      "source": "SEO and Social Media Reports",
+      "signal_type": "Low Current but Watchlist Demand",
+      "summary": "Currently minimal SEO and social interest in luxury homes and Lake Belton area searches, signaling latent or underdeveloped market space.",
+      "why_it_matters": "Luxury and lakefront property segments could become impactful if interest grows; early monitoring is advised.",
+      "affected_opportunities": [
+        "Luxury market content development",
+        "Lake Belton property listings"
+      ],
+      "likely_client_types": [
+        "High net worth buyers",
+        "Lakehouse seekers"
+      ],
+      "future_questions_people_will_ask": [
+        "Luxury homes near Lake Belton",
+        "Lake Belton waterfront property prices",
+        "Luxury new construction in Bell County"
+      ],
+      "time_horizon": "Long term",
+      "confidence": 0.3,
+      "business_value_score": 0,
+      "generated_at": "2026-07-02T14:17:13.467929"
+    }
+  ]
+}

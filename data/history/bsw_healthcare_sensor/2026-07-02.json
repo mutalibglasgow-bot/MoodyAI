@@ -1,0 +1,45 @@
+{
+  "date": "2026-07-02",
+  "sensor_name": "BSW Healthcare Sensor",
+  "signal_count": 1,
+  "average_score": 100.0,
+  "signals": [
+    {
+      "signal_name": "BSW Healthcare Hiring Demand Classified",
+      "source": "BSW Careers / BSW Job Sources",
+      "signal_type": "Healthcare Employment",
+      "summary": "Detected 52 classified BSW healthcare hiring signals. Role mix: Attending Physician / Specialist: 37; Surgeon / High-Income Specialist: 4; Healthcare Recruiting Signal: 9; Advanced Practice Provider: 1; Healthcare Executive / Leadership: 1. Estimated relocations: 32.3. Estimated housing demand range: $16,845,000 - $40,762,500. Examples: Physicians; Esther H., Cardiothoracic Surgeon; In-house Recruiters; Featured Recruiters; Senior Physician Recruiter; APP Recruiter; Recruiters; Additional Recruiters",
+      "why_it_matters": "BSW healthcare hiring is a leading indicator of future relocation demand. Physicians, specialists, healthcare executives, advanced practice providers, and clinical staff create housing demand before they begin searching for a Realtor.",
+      "affected_opportunities": [
+        "BSW Attending Physicians",
+        "BSW Residents & Fellows",
+        "High-Income Healthcare Professionals",
+        "Executive Corporate Relocations",
+        "Luxury Home Buyers",
+        "Move-Up Buyers",
+        "Belton Sellers"
+      ],
+      "likely_client_types": [
+        "Attending physicians",
+        "Surgeons",
+        "Medical specialists",
+        "Healthcare executives",
+        "Advanced practice providers",
+        "Relocating healthcare families"
+      ],
+      "future_questions_people_will_ask": [
+        "Where should I live if I work at BSW Temple?",
+        "Is Belton or Temple better for BSW physicians?",
+        "What neighborhoods are best near BSW?",
+        "Should I buy or rent first?",
+        "What is the commute to BSW?",
+        "What schools and lifestyle options should we consider?",
+        "What physician mortgage options are available?"
+      ],
+      "time_horizon": "30-180 days",
+      "confidence": 0.9,
+      "business_value_score": 100,
+      "generated_at": "2026-07-02T18:17:50.680226"
+    }
+  ]
+}

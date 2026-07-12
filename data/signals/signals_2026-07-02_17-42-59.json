@@ -1,0 +1,341 @@
+{
+  "generated_at": "2026-07-02T17:42:59.134753",
+  "signal_count": 10,
+  "signals": [
+    {
+      "signal_name": "BSW / Physician Relocation Search Interest",
+      "source": "Google Search Console / SEO Reports",
+      "signal_type": "Search Demand",
+      "summary": "Consistent and steady search volume for BSW Temple physician relocation topics, including comparative searches like 'Temple vs Austin for Medical Residents' and 'Best Neighborhoods Near BSW Temple'. SEO content targeting physician salary and cost of living is ranking with room to improve.",
+      "why_it_matters": "Physician relocation searches correlate with inbound leads for buyer and seller activity near BSW Temple, a key market niche. Capturing these searches supports mid to long-term patient and provider employee housing demand pipelines.",
+      "affected_opportunities": [
+        "Physician Relocation Leads",
+        "Follow Up Boss Active Leads",
+        "Temple Buyer Market"
+      ],
+      "likely_client_types": [
+        "BSW Medical Staff",
+        "Physician Families Relocating",
+        "Hospital Staff Coordinators"
+      ],
+      "future_questions_people_will_ask": [
+        "Is Temple a better place to live than Austin for medical residents?",
+        "What are the best neighborhoods near BSW Temple for physicians?",
+        "How do physician salaries compare between Temple and Austin?"
+      ],
+      "time_horizon": "3-12 months",
+      "confidence": 0.9,
+      "business_value_score": 100,
+      "generated_at": "2026-07-02T17:42:36.921707"
+    },
+    {
+      "signal_name": "BSW Healthcare Hiring Demand Classified",
+      "source": "BSW Careers / BSW Job Sources",
+      "signal_type": "Healthcare Employment",
+      "summary": "Detected 52 classified BSW healthcare hiring signals. Role mix: Attending Physician / Specialist: 37; Surgeon / High-Income Specialist: 4; Healthcare Recruiting Signal: 9; Advanced Practice Provider: 1; Healthcare Executive / Leadership: 1. Estimated relocations: 32.3. Estimated housing demand range: $16,845,000 - $40,762,500. Examples: Physicians; Esther H., Cardiothoracic Surgeon; In-house Recruiters; Featured Recruiters; Senior Physician Recruiter; APP Recruiter; Recruiters; Additional Recruiters",
+      "why_it_matters": "BSW healthcare hiring is a leading indicator of future relocation demand. Physicians, specialists, healthcare executives, advanced practice providers, and clinical staff create housing demand before they begin searching for a Realtor.",
+      "affected_opportunities": [
+        "BSW Attending Physicians",
+        "BSW Residents & Fellows",
+        "High-Income Healthcare Professionals",
+        "Executive Corporate Relocations",
+        "Luxury Home Buyers",
+        "Move-Up Buyers",
+        "Belton Sellers"
+      ],
+      "likely_client_types": [
+        "Attending physicians",
+        "Surgeons",
+        "Medical specialists",
+        "Healthcare executives",
+        "Advanced practice providers",
+        "Relocating healthcare families"
+      ],
+      "future_questions_people_will_ask": [
+        "Where should I live if I work at BSW Temple?",
+        "Is Belton or Temple better for BSW physicians?",
+        "What neighborhoods are best near BSW?",
+        "Should I buy or rent first?",
+        "What is the commute to BSW?",
+        "What schools and lifestyle options should we consider?",
+        "What physician mortgage options are available?"
+      ],
+      "time_horizon": "30-180 days",
+      "confidence": 0.9,
+      "business_value_score": 100,
+      "generated_at": "2026-07-02T17:42:57.474996"
+    },
+    {
+      "signal_name": "Belton Seller & FSBO Search Activity",
+      "source": "Google Search Console / SEO Reports",
+      "signal_type": "Search Demand",
+      "summary": "Stable and consistent search interest around Belton seller topics, specifically focusing on FSBO versus Realtor comparisons and local market insights around homes under $400k. Local educational content is requested to assist seller decision-making.",
+      "why_it_matters": "Belton seller searches indicate a motivated seller market segment. Engaging them with FSBO vs Realtor guidance can convert more listings and increase local market share.",
+      "affected_opportunities": [
+        "Belton Seller Leads",
+        "FSBO Lead Funnel Growth"
+      ],
+      "likely_client_types": [
+        "Belton Homeowners",
+        "For Sale By Owner Sellers",
+        "Local Real Estate Investors"
+      ],
+      "future_questions_people_will_ask": [
+        "Should I sell my Belton home FSBO or with a Realtor?",
+        "What is the current market trend for Belton homes under $400k?",
+        "How do FSBO homes perform in the Belton market?"
+      ],
+      "time_horizon": "1-6 months",
+      "confidence": 0.85,
+      "business_value_score": 100,
+      "generated_at": "2026-07-02T17:42:36.921707"
+    },
+    {
+      "signal_name": "Temple Growth / Economic Development Activity Detected",
+      "source": "Temple EDC / City of Temple Growth Sources",
+      "signal_type": "Economic Development",
+      "summary": "Detected 58 Temple growth and economic-development signals. Data center mentions: 5. Investment mentions: 14. Acreage/land mentions: 3. Jobs/employment mentions: 5. Industrial/distribution/manufacturing mentions: 14. Examples: Temple Economic Development Corporation | Temple TX; Austin\u2019s Industrial Gateway; Temple is on the cusp of significant growth and economic development \u2013 in everything from population to quality of life amenities to corporate investment. Check out our latest stats.; 16.5% Increase in Jobs; $3.5B+ Private Investment; 2,000 Shovel-Ready Acres Available; Learn about our industry assets and access the data, sites and information needed to make your move to Temple.; Properties in Temple span across industrial and commercial business needs and everything in between.",
+      "why_it_matters": "Temple economic-development activity is a leading indicator of future housing demand. Major employers, industrial projects, data centers, land purchases, and infrastructure investment can create future buyers, sellers, investors, builders, renters, and relocation clients.",
+      "affected_opportunities": [
+        "High-Equity Homeowners",
+        "Local Home Sellers",
+        "Residential Investors",
+        "Executive Corporate Relocations",
+        "New Construction Buyers",
+        "Move-Up Buyers",
+        "Remote Workers & Digital Professionals",
+        "Acreage & Ranch Buyers"
+      ],
+      "likely_client_types": [
+        "Investors",
+        "Builders",
+        "High-equity homeowners",
+        "Corporate relocation buyers",
+        "Move-up buyers",
+        "Local sellers near growth corridors",
+        "Employees relocating for new jobs"
+      ],
+      "future_questions_people_will_ask": [
+        "What is being built in Temple?",
+        "Will this development affect home values?",
+        "Should I buy before prices rise?",
+        "Which neighborhoods will benefit from growth?",
+        "Is East or South Temple becoming a growth corridor?",
+        "Should investors buy near new development?",
+        "Will data centers affect Temple real estate?"
+      ],
+      "time_horizon": "6-36 months",
+      "confidence": 0.8,
+      "business_value_score": 100,
+      "generated_at": "2026-07-02T17:42:59.130963"
+    },
+    {
+      "signal_name": "High-Intent Follow Up Boss Leads Detected",
+      "source": "Follow Up Boss API",
+      "signal_type": "Lead Activity",
+      "summary": "Detected 21 high-intent leads. Top leads: Khalil Hale, Crystal Rymer, Mischa Quinn, Deborah Viramontes, LISA DUBOS.",
+      "why_it_matters": "These leads may represent immediate revenue opportunities. They should be prioritized because they are already in Moody's pipeline.",
+      "affected_opportunities": [
+        "Local Home Sellers",
+        "Move-Up Buyers",
+        "High-Equity Homeowners",
+        "BSW / Physician Relocation"
+      ],
+      "likely_client_types": [
+        "Motivated sellers",
+        "Cash offer leads",
+        "Relocation buyers",
+        "High-intent prospects"
+      ],
+      "future_questions_people_will_ask": [
+        "What is my home worth?",
+        "Should I sell now?",
+        "What are my options?",
+        "Who can help me move quickly?"
+      ],
+      "time_horizon": "Immediate",
+      "confidence": 0.9,
+      "business_value_score": 95,
+      "generated_at": "2026-07-02T17:42:37.708364"
+    },
+    {
+      "signal_name": "Temple vs Belton Location Comparison Searches",
+      "source": "Google Search Console / SEO Reports",
+      "signal_type": "Search Demand",
+      "summary": "Search interest comparing Temple and Belton as housing options, often from buyers evaluating commute, price points, and amenities. Content on 'Temple vs Austin' is well justified, and 'Temple vs Belton' comparison searches are on watch.",
+      "why_it_matters": "Prospective buyers are researching comparative value and lifestyle between proximate cities, informing their location decision and purchase likelihood.",
+      "affected_opportunities": [
+        "Temple Buyers",
+        "Belton Buyers",
+        "Physician Relocations"
+      ],
+      "likely_client_types": [
+        "First-Time Buyers",
+        "Relocating Families",
+        "Value-Conscious Buyers"
+      ],
+      "future_questions_people_will_ask": [
+        "Is buying in Belton more affordable than Temple?",
+        "Which city has better schools and amenities, Temple or Belton?",
+        "How does commute time compare between Belton and Temple to places like BSW?"
+      ],
+      "time_horizon": "3-6 months",
+      "confidence": 0.75,
+      "business_value_score": 40,
+      "generated_at": "2026-07-02T17:42:36.921707"
+    },
+    {
+      "signal_name": "First-Time Buyer and New Construction Searches",
+      "source": "Google Search Console / SEO Reports",
+      "signal_type": "Search Demand",
+      "summary": "Modest search interest in first-time buyer and new construction-related queries, particularly around Temple buyers and price point sensitivity. New construction searches are tied to emerging inventory but currently lower volume.",
+      "why_it_matters": "These buyers represent an important future growth segment, especially as new builds and affordable homes attract entry-level clients.",
+      "affected_opportunities": [
+        "Temple Buyer Leads",
+        "New Construction Market"
+      ],
+      "likely_client_types": [
+        "First-Time Homebuyers",
+        "Young Families",
+        "Investors in New Builds"
+      ],
+      "future_questions_people_will_ask": [
+        "Where are new construction homes available in Temple?",
+        "What incentives exist for first-time buyers in Bell County?",
+        "How do property taxes compare on new builds versus existing homes?"
+      ],
+      "time_horizon": "3-9 months",
+      "confidence": 0.6,
+      "business_value_score": 40,
+      "generated_at": "2026-07-02T17:42:36.921707"
+    },
+    {
+      "signal_name": "Property Tax Search Interest",
+      "source": "Google Search Console / SEO Reports",
+      "signal_type": "Search Demand",
+      "summary": "Ongoing but moderate search activity on property tax-related queries in Bell County affecting buyer/seller perceptions, noted as though not a rapidly shifting topic.",
+      "why_it_matters": "Property tax concerns influence buyer affordability and seller pricing strategies, thus indirectly impacting transaction volumes and urgency.",
+      "affected_opportunities": [
+        "Buyer Queries",
+        "Seller Pricing Strategies"
+      ],
+      "likely_client_types": [
+        "Buyers",
+        "Sellers",
+        "Real Estate Agents"
+      ],
+      "future_questions_people_will_ask": [
+        "What are property tax rates in Belton and Temple?",
+        "How do property taxes affect mortgage payments?",
+        "Are there exemptions or reductions for military or medical professionals?"
+      ],
+      "time_horizon": "Ongoing",
+      "confidence": 0.7,
+      "business_value_score": 20,
+      "generated_at": "2026-07-02T17:42:36.921707"
+    },
+    {
+      "signal_name": "Fort Cavazos / Military PCS Search Interest",
+      "source": "Google Search Console / SEO Reports",
+      "signal_type": "Search Demand",
+      "summary": "Emerging signals of demand for military PCS (Permanent Change of Station) relocation housing related to Fort Cavazos, with growing interest in PCS housing guides.",
+      "why_it_matters": "Military relocation search signals presage future client influx from military families seeking housing near Fort Cavazos. Early content preparation can position the business as a trusted resource.",
+      "affected_opportunities": [
+        "Military Family Relocation Leads",
+        "Fort Cavazos Housing Market"
+      ],
+      "likely_client_types": [
+        "Military Personnel & Families",
+        "Military Housing Coordinators"
+      ],
+      "future_questions_people_will_ask": [
+        "What are the best neighborhoods near Fort Cavazos for military families?",
+        "How do PCS relocations impact the Bell County housing market?",
+        "Are there special programs or financing options for military homebuyers?"
+      ],
+      "time_horizon": "6-12 months",
+      "confidence": 0.6,
+      "business_value_score": 0,
+      "generated_at": "2026-07-02T17:42:36.921707"
+    },
+    {
+      "signal_name": "Luxury and Lake Belton Search Signals",
+      "source": "Google Search Console / SEO Reports",
+      "signal_type": "Search Demand",
+      "summary": "Currently low/no significant reported demand for luxury or Lake Belton property searches in the latest data; no new trends or increased signals detected.",
+      "why_it_matters": "Absence of emergent search demand suggests low current buying interest in luxury segment or lakefront properties in Belton area, warranting continued monitoring but no immediate focus.",
+      "affected_opportunities": [],
+      "likely_client_types": [],
+      "future_questions_people_will_ask": [],
+      "time_horizon": "N/A",
+      "confidence": 0.2,
+      "business_value_score": 0,
+      "generated_at": "2026-07-02T17:42:36.921707"
+    }
+  ],
+  "trend_summary": {
+    "generated_at": "2026-07-02T17:42:59.134125",
+    "trends": [
+      {
+        "sensor_name": "Follow Up Boss Sensor",
+        "latest_date": "2026-07-02",
+        "latest_signal_count": 1,
+        "latest_average_score": 95.0,
+        "yesterday_signal_count": null,
+        "yesterday_average_score": null,
+        "one_day_signal_change_percent": null,
+        "one_day_score_change_percent": null,
+        "seven_day_average_signal_count": 1.0,
+        "thirty_day_average_signal_count": 1.0,
+        "seven_day_average_score": 95.0,
+        "thirty_day_average_score": 95.0,
+        "momentum": "Stable"
+      },
+      {
+        "sensor_name": "Search Console Sensor",
+        "latest_date": "2026-07-02",
+        "latest_signal_count": 7,
+        "latest_average_score": 42.86,
+        "yesterday_signal_count": null,
+        "yesterday_average_score": null,
+        "one_day_signal_change_percent": null,
+        "one_day_score_change_percent": null,
+        "seven_day_average_signal_count": 7.0,
+        "thirty_day_average_signal_count": 7.0,
+        "seven_day_average_score": 42.86,
+        "thirty_day_average_score": 42.86,
+        "momentum": "Stable"
+      },
+      {
+        "sensor_name": "BSW Healthcare Sensor",
+        "latest_date": "2026-07-02",
+        "latest_signal_count": 1,
+        "latest_average_score": 100.0,
+        "yesterday_signal_count": null,
+        "yesterday_average_score": null,
+        "one_day_signal_change_percent": null,
+        "one_day_score_change_percent": null,
+        "seven_day_average_signal_count": 1.0,
+        "thirty_day_average_signal_count": 1.0,
+        "seven_day_average_score": 100.0,
+        "thirty_day_average_score": 100.0,
+        "momentum": "Stable"
+      },
+      {
+        "sensor_name": "Temple EDC / Growth Sensor",
+        "latest_date": "2026-07-02",
+        "latest_signal_count": 1,
+        "latest_average_score": 100.0,
+        "yesterday_signal_count": null,
+        "yesterday_average_score": null,
+        "one_day_signal_change_percent": null,
+        "one_day_score_change_percent": null,
+        "seven_day_average_signal_count": 1.0,
+        "thirty_day_average_signal_count": 1.0,
+        "seven_day_average_score": 100.0,
+        "thirty_day_average_score": 100.0,
+        "momentum": "Stable"
+      }
+    ]
+  }
+}

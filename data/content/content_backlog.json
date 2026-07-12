@@ -1,0 +1,30 @@
+[
+  {
+    "id": "BSW-001",
+    "topic": "Temple vs Austin for Medical Residents",
+    "category": "BSW / Physician Relocation",
+    "priority": 95,
+    "status": "not_started"
+  },
+  {
+    "id": "BSW-002",
+    "topic": "Best Neighborhoods Near BSW Temple",
+    "category": "BSW / Physician Relocation",
+    "priority": 90,
+    "status": "not_started"
+  },
+  {
+    "id": "PCS-001",
+    "topic": "Fort Cavazos PCS Housing Guide",
+    "category": "Fort Cavazos / Military PCS",
+    "priority": 85,
+    "status": "not_started"
+  },
+  {
+    "id": "SELLER-001",
+    "topic": "Belton FSBO vs Realtor Guide",
+    "category": "Belton Sellers",
+    "priority": 82,
+    "status": "not_started"
+  }
+]
