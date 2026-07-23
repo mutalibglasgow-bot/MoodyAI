@@ -7,13 +7,46 @@ from pathlib import Path
 from typing import Any
 
 from dotenv import load_dotenv
-from fastapi import FastAPI, HTTPException
-from fastapi.responses import FileResponse
+from moodyai_learning.health import build_health_report
+from moodyai_learning.security import AuthConfig, SessionAuth
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import FileResponse, JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
+from moodyai_learning import (
+    DecisionService,
+    ExecutionService,
+    LearningEvaluator,
+    LearningLedger,
+    OutcomeService,
+    PolicyAdaptationService,
+    PolicyRegistry,
+    RecommendationService,
+    normalize_and_record_lead,
+)
+from moodyai_learning.fub_sync import FUBSyncPreviewService
+from moodyai_learning.fub_import import FUBSyncImportService
+from moodyai_learning.auto_sync import FUBAutoSyncService
+from moodyai_learning.auto_outcomes import FUBAutoOutcomeService
+from moodyai_learning.background_sync import BackgroundSyncCoordinator
+from moodyai_learning.backups import DatabaseBackupCoordinator
+from moodyai_learning.production import RequestLogMiddleware, configure_structured_logging, validate_startup
+from moodyai_learning.paths import database_path, backup_directory
+
 ROOT = Path(__file__).resolve().parent
 load_dotenv(ROOT / ".env")
+configure_structured_logging()
+
+LEARNING_LEDGER = LearningLedger(database_path())
+RECOMMENDATION_SERVICE = RecommendationService(LEARNING_LEDGER)
+DECISION_SERVICE = DecisionService(LEARNING_LEDGER)
+EXECUTION_SERVICE = ExecutionService(LEARNING_LEDGER)
+OUTCOME_SERVICE = OutcomeService(LEARNING_LEDGER)
+LEARNING_EVALUATOR = LearningEvaluator(LEARNING_LEDGER)
+POLICY_ADAPTATION_SERVICE = PolicyAdaptationService(LEARNING_LEDGER)
+POLICY_REGISTRY = PolicyRegistry(LEARNING_LEDGER)
+STARTUP_VALIDATION_REPORT: dict[str, Any] = {}
 
 app = FastAPI(
     title="MoodyAI",
@@ -21,6 +54,102 @@ app = FastAPI(
     version="1.2.0",
 )
 app.mount("/static", StaticFiles(directory=ROOT / "static"), name="static")
+app.add_middleware(RequestLogMiddleware)
+
+
+PROTECTED_PREFIXES = ("/learning", "/api/learning", "/api/recommendations", "/api/leads")
+AUTH_EXEMPT_PATHS = {"/login", "/logout", "/health", "/api/health"}
+
+
+def _auth() -> SessionAuth | None:
+    config = AuthConfig.from_environment()
+    return SessionAuth(config) if config else None
+
+
+@app.middleware("http")
+async def protect_learning_console(request: Request, call_next):
+    path = request.url.path
+    protected = any(path == prefix or path.startswith(prefix + "/") for prefix in PROTECTED_PREFIXES)
+    if not protected or path in AUTH_EXEMPT_PATHS:
+        return await call_next(request)
+    auth = _auth()
+    if auth is None:
+        if path.startswith("/api/"):
+            return JSONResponse({"detail": "MoodyAI authentication is not configured"}, status_code=503)
+        return FileResponse(ROOT / "static" / "login.html", status_code=503)
+    if auth.verify_token(request.cookies.get(auth.cookie_name)):
+        return await call_next(request)
+    if path.startswith("/api/"):
+        return JSONResponse({"detail": "Authentication required"}, status_code=401)
+    return RedirectResponse("/login", status_code=303)
+
+
+def _run_background_learning_cycle() -> dict[str, Any]:
+    """Run the same automatic FUB loop without requiring the UI to be open."""
+    if not live_fub_available():
+        return {
+            "mode": "background_sync",
+            "status": "not_configured",
+            "imported_count": 0,
+            "automatic_outcome_count": 0,
+            "error_count": 0,
+            "evaluation": {"evaluated": 0, "skipped_without_outcomes": 0},
+        }
+
+    from services.followupboss import get_calls, get_events, get_person, get_text_messages
+
+    preview_service = FUBSyncPreviewService(
+        LEARNING_LEDGER,
+        get_calls=get_calls,
+        get_text_messages=get_text_messages,
+        get_events=get_events,
+    )
+    activity_result = FUBAutoSyncService(LEARNING_LEDGER, preview_service).sync(limit=50)
+    outcome_result = FUBAutoOutcomeService(LEARNING_LEDGER, get_person=get_person).sync(limit=100)
+    evaluation_result = LEARNING_EVALUATOR.evaluate_all()
+    return {
+        **activity_result,
+        "automatic_outcomes": outcome_result,
+        "automatic_outcome_count": outcome_result.get("imported_count", 0),
+        "total_changes": int(activity_result.get("imported_count", 0)) + int(outcome_result.get("imported_count", 0)),
+        "evaluation": evaluation_result,
+    }
+
+
+BACKGROUND_SYNC = BackgroundSyncCoordinator(
+    LEARNING_LEDGER.database_path,
+    _run_background_learning_cycle,
+)
+
+
+DATABASE_BACKUPS = DatabaseBackupCoordinator(
+    LEARNING_LEDGER.database_path,
+    backup_dir=backup_directory(),
+)
+
+
+@app.on_event("startup")
+def _start_background_sync() -> None:
+    global STARTUP_VALIDATION_REPORT
+    STARTUP_VALIDATION_REPORT = validate_startup(ROOT, LEARNING_LEDGER.database_path).to_dict()
+    BACKGROUND_SYNC.start()
+    DATABASE_BACKUPS.start()
+
+
+@app.on_event("shutdown")
+def _stop_background_sync() -> None:
+    DATABASE_BACKUPS.stop()
+    BACKGROUND_SYNC.stop()
+
+
+@app.get("/ready")
+def readiness() -> JSONResponse:
+    status = STARTUP_VALIDATION_REPORT.get("status", "starting")
+    ready = status in {"healthy", "degraded"}
+    return JSONResponse(
+        {"ready": ready, "startup": STARTUP_VALIDATION_REPORT},
+        status_code=200 if ready else 503,
+    )
 
 
 class AdvisorRequest(BaseModel):
@@ -34,6 +163,37 @@ class ExecutionPromptRequest(BaseModel):
 
 class ExecutionGenerateRequest(ExecutionPromptRequest):
     prompt: str | None = Field(default=None, max_length=20000)
+
+
+class RecommendationDecisionRequest(BaseModel):
+    status: str = Field(min_length=4, max_length=20)
+    selected_action: str | None = Field(default=None, max_length=2000)
+    reason: str | None = Field(default=None, max_length=4000)
+    decided_by: str = Field(default="Moody", min_length=1, max_length=200)
+
+
+class RecommendationExecutionRequest(BaseModel):
+    action_type: str = Field(min_length=1, max_length=200)
+    status: str = Field(min_length=4, max_length=20)
+    notes: str | None = Field(default=None, max_length=4000)
+    external_system: str | None = Field(default=None, max_length=200)
+    external_reference: str | None = Field(default=None, max_length=500)
+    performed_by: str = Field(default="Moody", min_length=1, max_length=200)
+
+
+class FUBSyncReviewRequest(BaseModel):
+    status: str = Field(min_length=8, max_length=8)
+    import_outcome: bool = False
+    reason: str | None = Field(default=None, max_length=4000)
+    reviewed_by: str = Field(default="Moody", min_length=1, max_length=200)
+
+
+class RecommendationOutcomeRequest(BaseModel):
+    outcome_type: str = Field(min_length=3, max_length=50)
+    outcome_value: float | None = None
+    source: str = Field(default="manual", min_length=1, max_length=200)
+    attribution_confidence: float = Field(default=1.0, ge=0, le=1)
+    notes: str | None = Field(default=None, max_length=4000)
 
 
 DEMO_LEADS = [
@@ -237,29 +397,12 @@ def confidence_label(value: float) -> str:
 
 
 def normalize_lead(person: dict[str, Any]) -> dict[str, Any]:
-    stage = str(person.get("stage") or "New")
-    visits = int(person.get("websiteVisits") or 0)
-    score = 35
-    if person.get("phone") or person.get("phones"):
-        score += 15
-    if person.get("email") or person.get("emails"):
-        score += 10
-    if visits >= 3:
-        score += 20
-    if "cash" in stage.lower() or "appointment" in stage.lower():
-        score += 15
-    score = min(score, 100)
-    temperature = "HOT" if score >= 80 else "WARM" if score >= 55 else "COLD"
-    return {
-        "id": person.get("id"),
-        "name": person.get("name") or person.get("displayName") or "Unnamed lead",
-        "stage": stage,
-        "source": person.get("source") or "Unknown",
-        "temperature": temperature,
-        "score": score,
-        "lastActivity": person.get("lastActivity") or person.get("created") or "No recent activity",
-        "recommendedAction": "Review the lead context and make a personal follow-up today.",
-    }
+    return normalize_and_record_lead(
+        person,
+        recommendation_service=RECOMMENDATION_SERVICE,
+        source_mode="live",
+        policy_registry=POLICY_REGISTRY,
+    )
 
 
 ASSET_SPECS: dict[str, dict[str, str]] = {
@@ -390,9 +533,60 @@ def demo_execution_output(opportunity: dict[str, Any], asset_type: str) -> str:
     return f"# {title}: What It Means and What to Do Next\n\n## The opportunity\n{opportunity.get('executive_summary', '')}\n\n## Why this matters now\n{why_now}\n\n## What the evidence suggests\n" + "\n".join(f"- {e.get('statement', '')}" for e in opportunity.get('evidence', [])[:4]) + f"\n\n## A practical next step\nFor {audience.lower()}, the right response is clear, useful guidance that addresses timing, location, and the decisions that matter most.\n\n## Need help evaluating your options?\nMoody Glasgow provides straightforward local real estate guidance for Central Texas buyers, sellers, and relocating families."
 
 
+
+@app.get("/login", include_in_schema=False)
+def login_page(request: Request):
+    auth = _auth()
+    if auth and auth.verify_token(request.cookies.get(auth.cookie_name)):
+        return RedirectResponse("/learning", status_code=303)
+    return FileResponse(ROOT / "static" / "login.html")
+
+
+@app.post("/login", include_in_schema=False)
+async def login(request: Request):
+    auth = _auth()
+    if auth is None:
+        raise HTTPException(status_code=503, detail="Authentication is not configured. Run configure_step15.py.")
+    body = (await request.body()).decode("utf-8", errors="replace")
+    from urllib.parse import parse_qs
+    password = parse_qs(body).get("password", [""])[0]
+    if not auth.verify_password(password):
+        raise HTTPException(status_code=401, detail="Incorrect password")
+    response = JSONResponse({"authenticated": True})
+    response.set_cookie(
+        auth.cookie_name,
+        auth.create_token(),
+        max_age=auth.config.session_hours * 3600,
+        httponly=True,
+        samesite="strict",
+        secure=os.getenv("MOODYAI_SECURE_COOKIES", "false").lower() == "true",
+        path="/",
+    )
+    return response
+
+
+@app.post("/logout", include_in_schema=False)
+def logout():
+    response = JSONResponse({"authenticated": False})
+    response.delete_cookie("moodyai_session", path="/")
+    return response
+
+
+@app.get("/health", include_in_schema=False)
+def public_health():
+    report = build_health_report(LEARNING_LEDGER.database_path, BACKGROUND_SYNC.status, DATABASE_BACKUPS.status)
+    status_code = 503 if report["status"] == "unhealthy" else 200
+    return JSONResponse(report, status_code=status_code)
+
+
 @app.get("/", include_in_schema=False)
 def index() -> FileResponse:
     return FileResponse(ROOT / "static" / "index.html")
+
+
+@app.get("/learning", include_in_schema=False)
+def learning_console() -> FileResponse:
+    return FileResponse(ROOT / "static" / "learning.html")
 
 
 @app.get("/api/health")
@@ -471,6 +665,512 @@ def get_leads() -> dict[str, Any]:
         except Exception as exc:
             return {"mode": "demo", "items": DEMO_LEADS, "warning": f"Live CRM unavailable: {type(exc).__name__}"}
     return {"mode": "demo", "items": DEMO_LEADS}
+
+
+@app.post("/api/recommendations/{recommendation_id}/decision")
+def record_recommendation_decision(
+    recommendation_id: str,
+    payload: RecommendationDecisionRequest,
+) -> dict[str, Any]:
+    try:
+        decision = DECISION_SERVICE.record_decision(
+            recommendation_id=recommendation_id,
+            status=payload.status,
+            selected_action=payload.selected_action,
+            reason=payload.reason,
+            decided_by=payload.decided_by,
+        )
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    return {
+        "recorded": True,
+        "decision": {
+            "decision_id": decision.decision_id,
+            "recommendation_id": decision.recommendation_id,
+            "status": decision.status,
+            "selected_action": decision.selected_action,
+            "reason": decision.reason,
+            "decided_by": decision.decided_by,
+            "decided_at": decision.decided_at,
+        },
+    }
+
+
+@app.get("/api/recommendations/{recommendation_id}/decisions")
+def recommendation_decisions(recommendation_id: str) -> dict[str, Any]:
+    if LEARNING_LEDGER.get_recommendation(recommendation_id) is None:
+        raise HTTPException(status_code=404, detail="Recommendation not found")
+    items = LEARNING_LEDGER.list_decisions(recommendation_id)
+    return {
+        "recommendation_id": recommendation_id,
+        "count": len(items),
+        "items": [
+            {
+                "decision_id": item.decision_id,
+                "status": item.status,
+                "selected_action": item.selected_action,
+                "reason": item.reason,
+                "decided_by": item.decided_by,
+                "decided_at": item.decided_at,
+            }
+            for item in items
+        ],
+    }
+
+
+@app.post("/api/recommendations/{recommendation_id}/executions")
+def record_recommendation_execution(
+    recommendation_id: str,
+    payload: RecommendationExecutionRequest,
+) -> dict[str, Any]:
+    try:
+        execution = EXECUTION_SERVICE.record_execution(
+            recommendation_id=recommendation_id,
+            action_type=payload.action_type,
+            status=payload.status,
+            notes=payload.notes,
+            external_system=payload.external_system,
+            external_reference=payload.external_reference,
+            performed_by=payload.performed_by,
+        )
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    return {
+        "recorded": True,
+        "execution": {
+            "execution_id": execution.execution_id,
+            "recommendation_id": execution.recommendation_id,
+            "action_type": execution.action_type,
+            "status": execution.status,
+            "notes": execution.notes,
+            "external_system": execution.external_system,
+            "external_reference": execution.external_reference,
+            "performed_by": execution.performed_by,
+            "performed_at": execution.performed_at,
+        },
+    }
+
+
+@app.get("/api/recommendations/{recommendation_id}/executions")
+def recommendation_executions(recommendation_id: str) -> dict[str, Any]:
+    if LEARNING_LEDGER.get_recommendation(recommendation_id) is None:
+        raise HTTPException(status_code=404, detail="Recommendation not found")
+    items = LEARNING_LEDGER.list_executions(recommendation_id)
+    return {
+        "recommendation_id": recommendation_id,
+        "count": len(items),
+        "items": [
+            {
+                "execution_id": item.execution_id,
+                "action_type": item.action_type,
+                "status": item.status,
+                "notes": item.notes,
+                "external_system": item.external_system,
+                "external_reference": item.external_reference,
+                "performed_by": item.performed_by,
+                "performed_at": item.performed_at,
+            }
+            for item in items
+        ],
+    }
+
+
+@app.post("/api/recommendations/{recommendation_id}/outcomes")
+def record_recommendation_outcome(
+    recommendation_id: str,
+    payload: RecommendationOutcomeRequest,
+) -> dict[str, Any]:
+    try:
+        outcome, inserted = OUTCOME_SERVICE.record_outcome_with_status(
+            recommendation_id=recommendation_id,
+            outcome_type=payload.outcome_type,
+            outcome_value=payload.outcome_value,
+            source=payload.source,
+            attribution_confidence=payload.attribution_confidence,
+            notes=payload.notes,
+        )
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    return {
+        "recorded": inserted,
+        "duplicate": not inserted,
+        "outcome": {
+            "outcome_id": outcome.outcome_id,
+            "recommendation_id": outcome.recommendation_id,
+            "outcome_type": outcome.outcome_type,
+            "outcome_value": outcome.outcome_value,
+            "source": outcome.source,
+            "attribution_confidence": outcome.attribution_confidence,
+            "notes": outcome.notes,
+            "observed_at": outcome.observed_at,
+        },
+    }
+
+
+@app.get("/api/recommendations/{recommendation_id}/outcomes")
+def recommendation_outcomes(recommendation_id: str) -> dict[str, Any]:
+    if LEARNING_LEDGER.get_recommendation(recommendation_id) is None:
+        raise HTTPException(status_code=404, detail="Recommendation not found")
+    items = LEARNING_LEDGER.list_outcomes(recommendation_id)
+    return {
+        "recommendation_id": recommendation_id,
+        "count": len(items),
+        "items": [
+            {
+                "outcome_id": item.outcome_id,
+                "outcome_type": item.outcome_type,
+                "outcome_value": item.outcome_value,
+                "source": item.source,
+                "attribution_confidence": item.attribution_confidence,
+                "notes": item.notes,
+                "observed_at": item.observed_at,
+            }
+            for item in items
+        ],
+    }
+
+
+
+
+@app.get("/api/learning/backups/status")
+def database_backup_status() -> dict[str, Any]:
+    return DATABASE_BACKUPS.status()
+
+
+@app.post("/api/learning/backups/run")
+def run_database_backup_now() -> dict[str, Any]:
+    return DATABASE_BACKUPS.run_once(force=True)
+
+
+@app.get("/api/learning/background-sync/status")
+def background_sync_status() -> dict[str, Any]:
+    return BACKGROUND_SYNC.status()
+
+
+@app.post("/api/learning/background-sync/run")
+def run_background_sync_now() -> dict[str, Any]:
+    """Optional diagnostic endpoint; normal operation requires no manual run."""
+    return BACKGROUND_SYNC.run_once()
+
+
+@app.get("/api/learning/fub-sync/preview")
+def preview_fub_sync(limit: int = 25) -> dict[str, Any]:
+    """Preview FUB activity matches without writing to the learning ledger."""
+    if not live_fub_available():
+        raise HTTPException(status_code=503, detail="Follow Up Boss is not configured")
+    if not 1 <= limit <= 100:
+        raise HTTPException(status_code=400, detail="limit must be between 1 and 100")
+    try:
+        from services.followupboss import get_calls, get_events, get_text_messages
+
+        service = FUBSyncPreviewService(
+            LEARNING_LEDGER,
+            get_calls=get_calls,
+            get_text_messages=get_text_messages,
+            get_events=get_events,
+        )
+        return service.preview(limit=limit)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+
+
+
+def _fub_sync_services() -> tuple[FUBSyncPreviewService, FUBSyncImportService]:
+    from services.followupboss import get_calls, get_events, get_text_messages
+
+    preview_service = FUBSyncPreviewService(
+        LEARNING_LEDGER,
+        get_calls=get_calls,
+        get_text_messages=get_text_messages,
+        get_events=get_events,
+    )
+    return preview_service, FUBSyncImportService(LEARNING_LEDGER, preview_service)
+
+
+@app.get("/api/learning/fub-sync/pending")
+def list_pending_fub_sync_candidates(limit: int = 25) -> dict[str, Any]:
+    if not live_fub_available():
+        raise HTTPException(status_code=503, detail="Follow Up Boss is not configured")
+    if not 1 <= limit <= 100:
+        raise HTTPException(status_code=400, detail="limit must be between 1 and 100")
+    preview_service, import_service = _fub_sync_services()
+    preview = preview_service.preview(limit=limit)
+    reviewed = import_service.list_reviews(limit=1000)
+    reviewed_keys = {
+        (item["source_kind"], str(item["external_reference"])) for item in reviewed
+    }
+    pending = [
+        item for item in preview.get("items", [])
+        if (item.get("source_kind"), str(item.get("external_reference"))) not in reviewed_keys
+    ]
+    return {**preview, "candidate_count": len(pending), "items": pending, "reviewed_count": len(reviewed)}
+
+
+@app.post("/api/learning/fub-sync/auto")
+def auto_sync_fub_activity(limit: int = 50) -> dict[str, Any]:
+    """Import clear FUB actions automatically; do not require duplicate entry."""
+    if not live_fub_available():
+        raise HTTPException(status_code=503, detail="Follow Up Boss is not configured")
+    if not 1 <= limit <= 100:
+        raise HTTPException(status_code=400, detail="limit must be between 1 and 100")
+    try:
+        preview_service, _ = _fub_sync_services()
+        activity_service = FUBAutoSyncService(LEARNING_LEDGER, preview_service)
+        activity_result = activity_service.sync(limit=limit)
+
+        from services.followupboss import get_person
+        outcome_service = FUBAutoOutcomeService(LEARNING_LEDGER, get_person=get_person)
+        outcome_result = outcome_service.sync(limit=min(limit, 100))
+
+        total_changes = int(activity_result.get("imported_count", 0)) + int(outcome_result.get("imported_count", 0))
+        if total_changes:
+            LEARNING_EVALUATOR.evaluate_all()
+        return {
+            **activity_result,
+            "automatic_outcomes": outcome_result,
+            "automatic_outcome_count": outcome_result.get("imported_count", 0),
+            "total_changes": total_changes,
+        }
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@app.get("/api/learning/fub-sync/reviews")
+def list_fub_sync_reviews(status: str | None = None, limit: int = 100) -> dict[str, Any]:
+    if not live_fub_available():
+        raise HTTPException(status_code=503, detail="Follow Up Boss is not configured")
+    try:
+        _, import_service = _fub_sync_services()
+        items = import_service.list_reviews(status=status, limit=limit)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    return {"count": len(items), "items": items}
+
+
+@app.post("/api/learning/fub-sync/candidates/{candidate_id}/review")
+def review_fub_sync_candidate(candidate_id: str, payload: FUBSyncReviewRequest) -> dict[str, Any]:
+    if not live_fub_available():
+        raise HTTPException(status_code=503, detail="Follow Up Boss is not configured")
+    try:
+        _, import_service = _fub_sync_services()
+        return import_service.review_candidate(
+            candidate_id,
+            status=payload.status,
+            import_outcome=payload.import_outcome,
+            reason=payload.reason,
+            reviewed_by=payload.reviewed_by,
+        )
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@app.post("/api/learning/evaluate")
+def evaluate_learning_records() -> dict[str, Any]:
+    result = LEARNING_EVALUATOR.evaluate_all()
+    return {
+        **result,
+        "summary": LEARNING_EVALUATOR.summary(),
+    }
+
+
+@app.get("/api/learning/summary")
+def learning_summary() -> dict[str, Any]:
+    return LEARNING_EVALUATOR.summary()
+
+
+@app.get("/api/recommendations/{recommendation_id}/evaluation")
+def recommendation_evaluation(recommendation_id: str) -> dict[str, Any]:
+    if LEARNING_LEDGER.get_recommendation(recommendation_id) is None:
+        raise HTTPException(status_code=404, detail="Recommendation not found")
+    evaluation = LEARNING_LEDGER.get_evaluation_for_recommendation(recommendation_id)
+    return {
+        "recommendation_id": recommendation_id,
+        "evaluation": (
+            {
+                "evaluation_id": evaluation.evaluation_id,
+                "policy_version": evaluation.policy_version,
+                "predicted_class": evaluation.predicted_class,
+                "score": evaluation.score,
+                "highest_outcome": evaluation.highest_outcome,
+                "outcome_rank": evaluation.outcome_rank,
+                "result_class": evaluation.result_class,
+                "prediction_correct": evaluation.prediction_correct,
+                "action_effective": evaluation.action_effective,
+                "evaluated_at": evaluation.evaluated_at,
+            }
+            if evaluation
+            else None
+        ),
+    }
+
+
+class PolicyProposalReviewRequest(BaseModel):
+    status: str = Field(..., min_length=7, max_length=8)
+    reason: str | None = Field(default=None, max_length=4000)
+    reviewed_by: str = Field(default="Moody", min_length=1, max_length=200)
+
+
+@app.post("/api/learning/proposals/generate")
+def generate_policy_proposals() -> dict[str, Any]:
+    return POLICY_ADAPTATION_SERVICE.generate_proposals()
+
+
+@app.get("/api/learning/proposals")
+def list_policy_proposals(status: str | None = None) -> dict[str, Any]:
+    try:
+        items = LEARNING_LEDGER.list_policy_proposals(status=status)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    return {
+        "count": len(items),
+        "automatic_activation": False,
+        "items": [
+            {
+                "proposal_id": item.proposal_id,
+                "current_policy_version": item.current_policy_version,
+                "proposed_policy_version": item.proposed_policy_version,
+                "feature_name": item.feature_name,
+                "current_weight": item.current_weight,
+                "proposed_weight": item.proposed_weight,
+                "direction": item.direction,
+                "sample_size": item.sample_size,
+                "feature_present_sample": item.feature_present_sample,
+                "feature_absent_sample": item.feature_absent_sample,
+                "feature_positive_rate": item.feature_positive_rate,
+                "baseline_positive_rate": item.baseline_positive_rate,
+                "effect_size": item.effect_size,
+                "minimum_effect": item.minimum_effect,
+                "rationale": item.rationale,
+                "status": item.status,
+                "created_at": item.created_at,
+                "reviewed_at": item.reviewed_at,
+                "reviewed_by": item.reviewed_by,
+                "review_reason": item.review_reason,
+            }
+            for item in items
+        ],
+    }
+
+
+@app.post("/api/learning/proposals/{proposal_id}/review")
+def review_policy_proposal(
+    proposal_id: str, payload: PolicyProposalReviewRequest
+) -> dict[str, Any]:
+    try:
+        proposal = POLICY_ADAPTATION_SERVICE.review_proposal(
+            proposal_id,
+            status=payload.status,
+            reason=payload.reason,
+            reviewed_by=payload.reviewed_by,
+        )
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    return {
+        "reviewed": True,
+        "activated": False,
+        "proposal": {
+            "proposal_id": proposal.proposal_id,
+            "status": proposal.status,
+            "current_policy_version": proposal.current_policy_version,
+            "proposed_policy_version": proposal.proposed_policy_version,
+            "feature_name": proposal.feature_name,
+            "current_weight": proposal.current_weight,
+            "proposed_weight": proposal.proposed_weight,
+            "reviewed_at": proposal.reviewed_at,
+            "reviewed_by": proposal.reviewed_by,
+            "review_reason": proposal.review_reason,
+        },
+    }
+
+
+class PolicyActivationRequest(BaseModel):
+    actor: str = Field(default="Moody", min_length=1, max_length=200)
+    reason: str | None = Field(default=None, max_length=4000)
+
+
+@app.get("/api/learning/policies")
+def list_scoring_policies() -> dict[str, Any]:
+    active = POLICY_REGISTRY.get_active_policy()
+    items = POLICY_REGISTRY.list_policies()
+    return {
+        "active_policy_version": active.version,
+        "count": len(items),
+        "items": [
+            {
+                "version": item.version,
+                "parent_version": item.parent_version,
+                "status": item.status,
+                "weights": item.weights,
+                "thresholds": item.thresholds,
+                "created_from_proposal": item.created_from_proposal,
+                "created_at": item.created_at,
+                "activated_at": item.activated_at,
+                "retired_at": item.retired_at,
+            }
+            for item in items
+        ],
+    }
+
+
+@app.post("/api/learning/proposals/{proposal_id}/candidate")
+def create_candidate_policy(proposal_id: str) -> dict[str, Any]:
+    try:
+        policy = POLICY_REGISTRY.create_candidate_from_proposal(proposal_id)
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    return {"created": True, "activated": False, "policy": {
+        "version": policy.version, "status": policy.status,
+        "parent_version": policy.parent_version, "weights": policy.weights,
+        "thresholds": policy.thresholds,
+    }}
+
+
+@app.post("/api/learning/policies/{policy_version}/backtest")
+def backtest_scoring_policy(policy_version: str) -> dict[str, Any]:
+    try:
+        return POLICY_REGISTRY.backtest(policy_version)
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@app.post("/api/learning/policies/{policy_version}/activate")
+def activate_scoring_policy(policy_version: str, payload: PolicyActivationRequest) -> dict[str, Any]:
+    try:
+        policy = POLICY_REGISTRY.activate(
+            policy_version, actor=payload.actor, reason=payload.reason
+        )
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    return {"activated": True, "active_policy_version": policy.version}
+
+
+@app.post("/api/learning/policies/{policy_version}/rollback")
+def rollback_scoring_policy(policy_version: str, payload: PolicyActivationRequest) -> dict[str, Any]:
+    try:
+        policy = POLICY_REGISTRY.rollback(
+            policy_version, actor=payload.actor, reason=payload.reason
+        )
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+    return {"rolled_back": True, "active_policy_version": policy.version}
 
 
 @app.post("/api/execution/prompt")

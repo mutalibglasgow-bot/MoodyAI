@@ -1,0 +1,37 @@
+services:
+  - type: web
+    name: moodyai
+    runtime: docker
+    plan: starter
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /ready
+    autoDeployTrigger: commit
+    envVars:
+      - key: MOODYAI_ENV
+        value: production
+      - key: MOODYAI_HOST
+        value: 0.0.0.0
+      - key: MOODYAI_DATA_DIR
+        value: /var/data
+      - key: MOODYAI_SECURE_COOKIES
+        value: "true"
+      - key: MOODYAI_FORWARDED_ALLOW_IPS
+        value: "*"
+      - key: MOODYAI_LOG_LEVEL
+        value: INFO
+      - key: MOODYAI_BACKGROUND_SYNC_ENABLED
+        value: "true"
+      - key: MOODYAI_BACKUPS_ENABLED
+        value: "true"
+      - key: MOODYAI_SESSION_SECRET
+        generateValue: true
+      - key: MOODYAI_ADMIN_PASSWORD
+        sync: false
+      - key: FOLLOWUPBOSS_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+    disk:
+      name: moodyai-data
+      mountPath: /var/data
+      sizeGB: 1

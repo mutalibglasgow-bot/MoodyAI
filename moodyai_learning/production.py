@@ -1,0 +1,197 @@
+from __future__ import annotations
+
+import json
+import logging
+import os
+import sys
+import time
+import uuid
+from dataclasses import dataclass, asdict
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any
+
+from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.requests import Request
+from starlette.responses import Response
+
+
+SENSITIVE_HEADERS = {"authorization", "cookie", "set-cookie", "x-api-key"}
+
+
+class JsonFormatter(logging.Formatter):
+    def format(self, record: logging.LogRecord) -> str:
+        payload: dict[str, Any] = {
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "level": record.levelname,
+            "logger": record.name,
+            "message": record.getMessage(),
+        }
+        for key in (
+            "request_id",
+            "method",
+            "path",
+            "status_code",
+            "duration_ms",
+            "client_ip",
+            "event",
+        ):
+            value = getattr(record, key, None)
+            if value is not None:
+                payload[key] = value
+        if record.exc_info:
+            payload["exception"] = self.formatException(record.exc_info)
+        return json.dumps(payload, separators=(",", ":"), default=str)
+
+
+def configure_structured_logging() -> None:
+    level_name = os.getenv("MOODYAI_LOG_LEVEL", "INFO").upper()
+    level = getattr(logging, level_name, logging.INFO)
+    handler = logging.StreamHandler(sys.stdout)
+    handler.setFormatter(JsonFormatter())
+    root = logging.getLogger()
+    root.handlers.clear()
+    root.addHandler(handler)
+    root.setLevel(level)
+    for name in ("uvicorn", "uvicorn.error", "uvicorn.access"):
+        logger = logging.getLogger(name)
+        logger.handlers.clear()
+        logger.propagate = True
+        if name == "uvicorn.access":
+            logger.disabled = True
+
+
+class RequestLogMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request: Request, call_next) -> Response:
+        request_id = request.headers.get("x-request-id") or uuid.uuid4().hex
+        started = time.perf_counter()
+        logger = logging.getLogger("moodyai.request")
+        try:
+            response = await call_next(request)
+        except Exception:
+            duration_ms = round((time.perf_counter() - started) * 1000, 2)
+            logger.exception(
+                "request_failed",
+                extra={
+                    "event": "request_failed",
+                    "request_id": request_id,
+                    "method": request.method,
+                    "path": request.url.path,
+                    "duration_ms": duration_ms,
+                    "client_ip": request.client.host if request.client else None,
+                },
+            )
+            raise
+        duration_ms = round((time.perf_counter() - started) * 1000, 2)
+        response.headers["X-Request-ID"] = request_id
+        logger.info(
+            "request_completed",
+            extra={
+                "event": "request_completed",
+                "request_id": request_id,
+                "method": request.method,
+                "path": request.url.path,
+                "status_code": response.status_code,
+                "duration_ms": duration_ms,
+                "client_ip": request.client.host if request.client else None,
+            },
+        )
+        return response
+
+
+@dataclass(frozen=True)
+class ValidationCheck:
+    name: str
+    status: str
+    detail: str
+    required: bool = True
+
+
+@dataclass(frozen=True)
+class StartupValidationReport:
+    environment: str
+    status: str
+    checked_at: str
+    checks: tuple[ValidationCheck, ...]
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "environment": self.environment,
+            "status": self.status,
+            "checked_at": self.checked_at,
+            "checks": [asdict(check) for check in self.checks],
+        }
+
+
+class StartupValidationError(RuntimeError):
+    def __init__(self, report: StartupValidationReport):
+        self.report = report
+        failures = [c.name for c in report.checks if c.required and c.status != "healthy"]
+        super().__init__("Startup validation failed: " + ", ".join(failures))
+
+
+def _writable_directory(path: Path) -> tuple[bool, str]:
+    try:
+        path.mkdir(parents=True, exist_ok=True)
+        marker = path / f".write_test_{uuid.uuid4().hex}"
+        marker.write_text("ok", encoding="utf-8")
+        marker.unlink()
+        return True, str(path)
+    except Exception as exc:
+        return False, f"{path}: {type(exc).__name__}: {exc}"
+
+
+def validate_startup(root: Path, database_path: Path) -> StartupValidationReport:
+    environment = os.getenv("MOODYAI_ENV", "development").strip().lower()
+    production = environment == "production"
+    checks: list[ValidationCheck] = []
+
+    static_dir = root / "static"
+    checks.append(ValidationCheck(
+        "static_files",
+        "healthy" if (static_dir / "learning.html").exists() and (static_dir / "login.html").exists() else "unhealthy",
+        str(static_dir),
+    ))
+
+    writable, detail = _writable_directory(database_path.parent)
+    checks.append(ValidationCheck("database_directory", "healthy" if writable else "unhealthy", detail))
+
+    auth_password = bool(os.getenv("MOODYAI_ADMIN_PASSWORD") or os.getenv("MOODYAI_AUTH_PASSWORD"))
+    session_secret = os.getenv("MOODYAI_SESSION_SECRET", "")
+    checks.append(ValidationCheck(
+        "authentication_password",
+        "healthy" if auth_password else ("unhealthy" if production else "warning"),
+        "configured" if auth_password else "MOODYAI_ADMIN_PASSWORD is missing",
+        required=production,
+    ))
+    checks.append(ValidationCheck(
+        "session_secret",
+        "healthy" if len(session_secret) >= 32 else ("unhealthy" if production else "warning"),
+        "configured" if len(session_secret) >= 32 else "MOODYAI_SESSION_SECRET must be at least 32 characters",
+        required=production,
+    ))
+
+    fub_key = bool(os.getenv("FOLLOWUPBOSS_API_KEY"))
+    checks.append(ValidationCheck(
+        "follow_up_boss",
+        "healthy" if fub_key else "warning",
+        "configured" if fub_key else "FOLLOWUPBOSS_API_KEY is missing; sync will be disabled",
+        required=False,
+    ))
+
+    backup_dir = Path(os.getenv("MOODYAI_BACKUP_DIR", "").strip() or (database_path.parent / "backups"))
+    backup_writable, backup_detail = _writable_directory(backup_dir)
+    checks.append(ValidationCheck("backup_directory", "healthy" if backup_writable else "unhealthy", backup_detail))
+
+    required_failures = [c for c in checks if c.required and c.status != "healthy"]
+    warnings = [c for c in checks if c.status == "warning"]
+    status = "unhealthy" if required_failures else ("degraded" if warnings else "healthy")
+    report = StartupValidationReport(
+        environment=environment,
+        status=status,
+        checked_at=datetime.now(timezone.utc).isoformat(),
+        checks=tuple(checks),
+    )
+    if production and required_failures:
+        raise StartupValidationError(report)
+    return report
