@@ -1,0 +1,315 @@
+from __future__ import annotations
+
+from dataclasses import dataclass
+from datetime import datetime, timezone
+from typing import Any, Callable
+
+
+def _items(payload: Any, keys: tuple[str, ...]) -> list[dict[str, Any]]:
+    if isinstance(payload, list):
+        return [item for item in payload if isinstance(item, dict)]
+    if isinstance(payload, dict):
+        for key in keys:
+            value = payload.get(key)
+            if isinstance(value, list):
+                return [item for item in value if isinstance(item, dict)]
+    return []
+
+
+def _event_time(item: dict[str, Any]) -> str | None:
+    # "occurred" is the best event timestamp when available.
+    for key in ("occurred", "created", "updated", "date", "createdAt", "updatedAt"):
+        value = item.get(key)
+        if value:
+            return str(value)
+    return None
+
+
+def _parse_timestamp(value: str | None) -> datetime | None:
+    if not value:
+        return None
+    try:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=timezone.utc)
+    return parsed.astimezone(timezone.utc)
+
+
+def _error_details(exc: Exception) -> dict[str, Any]:
+    details: dict[str, Any] = {"error": type(exc).__name__}
+    response = getattr(exc, "response", None)
+    if response is not None:
+        details["status_code"] = getattr(response, "status_code", None)
+        text = getattr(response, "text", "") or ""
+        if text:
+            details["message"] = text[:500]
+        url = getattr(response, "url", None)
+        if url:
+            details["url"] = str(url)
+    else:
+        message = str(exc).strip()
+        if message:
+            details["message"] = message[:500]
+    return details
+
+
+@dataclass(frozen=True, slots=True)
+class SyncCandidate:
+    candidate_id: str
+    recommendation_id: str
+    person_id: str
+    source_kind: str
+    external_reference: str
+    observed_at: str | None
+    proposed_execution: dict[str, Any] | None
+    proposed_outcome: dict[str, Any] | None
+    match_confidence: float
+    review_required: bool
+    reason: str
+    raw_summary: dict[str, Any]
+
+
+class FUBSyncPreviewService:
+    """Create review-only candidates from Follow Up Boss activity.
+
+    Activity is fetched once per person and source type, then attributed only to
+    the most recent recommendation that existed when the activity occurred.
+    This service never writes decisions, executions, or outcomes.
+    """
+
+    def __init__(
+        self,
+        ledger: Any,
+        *,
+        get_calls: Callable[..., Any],
+        get_text_messages: Callable[..., Any],
+        get_events: Callable[..., Any],
+    ) -> None:
+        self.ledger = ledger
+        self.get_calls = get_calls
+        self.get_text_messages = get_text_messages
+        self.get_events = get_events
+
+    def preview(self, *, limit: int = 25) -> dict[str, Any]:
+        recommendations = self.ledger.list_recommendations(entity_type="lead", limit=limit)
+        by_person: dict[str, list[Any]] = {}
+        for recommendation in recommendations:
+            by_person.setdefault(str(recommendation.entity_id), []).append(recommendation)
+
+        for person_recommendations in by_person.values():
+            person_recommendations.sort(
+                key=lambda recommendation: _parse_timestamp(recommendation.created_at)
+                or datetime.min.replace(tzinfo=timezone.utc)
+            )
+
+        candidates: list[SyncCandidate] = []
+        errors: list[dict[str, Any]] = []
+
+        for person_id, person_recommendations in by_person.items():
+            for kind, loader, keys in (
+                ("call", self.get_calls, ("calls",)),
+                ("text", self.get_text_messages, ("textMessages", "messages")),
+                ("event", self.get_events, ("events",)),
+            ):
+                try:
+                    payload = loader(person_id=int(person_id), limit=100)
+                except Exception as exc:
+                    error = {
+                        "person_id": person_id,
+                        "source_kind": kind,
+                        **_error_details(exc),
+                    }
+                    errors.append(error)
+                    continue
+
+                for item in _items(payload, keys):
+                    observed_at = _event_time(item)
+                    recommendation = self._latest_eligible_recommendation(
+                        person_recommendations,
+                        observed_at,
+                    )
+                    if recommendation is None:
+                        continue
+                    candidate = self._candidate(
+                        recommendation_id=recommendation.recommendation_id,
+                        person_id=person_id,
+                        kind=kind,
+                        item=item,
+                        observed_at=observed_at,
+                    )
+                    if candidate is not None:
+                        candidates.append(candidate)
+
+        candidates.sort(key=lambda item: item.observed_at or "", reverse=True)
+        unique: dict[str, SyncCandidate] = {}
+        for candidate in candidates:
+            # One FUB record can map to only one recommendation.
+            external_key = f"{candidate.source_kind}:{candidate.external_reference}"
+            unique[external_key] = candidate
+
+        items = [self._serialize(item) for item in unique.values()]
+        return {
+            "mode": "read_only_preview",
+            "writes_performed": False,
+            "partial_visibility_warning": (
+                "Follow Up Boss may not expose all call, text, or event records through its API."
+            ),
+            "recommendations_scanned": len(recommendations),
+            "people_scanned": len(by_person),
+            "candidate_count": len(items),
+            "error_count": len(errors),
+            "errors": errors,
+            "items": items,
+        }
+
+    @staticmethod
+    def _latest_eligible_recommendation(
+        recommendations: list[Any],
+        observed_at: str | None,
+    ) -> Any | None:
+        activity_time = _parse_timestamp(observed_at)
+        if activity_time is None:
+            return None
+
+        eligible = []
+        for recommendation in recommendations:
+            created_at = _parse_timestamp(recommendation.created_at)
+            if created_at is not None and created_at <= activity_time:
+                eligible.append((created_at, recommendation))
+
+        if not eligible:
+            return None
+        eligible.sort(key=lambda item: item[0])
+        return eligible[-1][1]
+
+    def _candidate(
+        self,
+        *,
+        recommendation_id: str,
+        person_id: str,
+        kind: str,
+        item: dict[str, Any],
+        observed_at: str | None,
+    ) -> SyncCandidate | None:
+        external_id = str(item.get("id") or item.get("_id") or "")
+        if not external_id:
+            return None
+
+        execution: dict[str, Any] | None = None
+        outcome: dict[str, Any] | None = None
+        confidence = 0.7
+        reason = (
+            "Activity belongs to the same FUB person and was assigned to the most "
+            "recent recommendation that existed when the activity occurred."
+        )
+
+        if kind == "call":
+            execution = {
+                "action_type": "call",
+                "status": "completed",
+                "external_system": "follow_up_boss",
+                "external_reference": f"call:{external_id}",
+                "notes": item.get("note") or item.get("outcome"),
+            }
+            call_outcome = str(item.get("outcome") or "").strip().lower()
+            mapping = {
+                "interested": "qualified_conversation",
+                "not interested": "not_interested",
+                "left message": "no_response",
+                "no answer": "no_response",
+                "busy": "no_response",
+                "bad number": "wrong_number",
+            }
+            if call_outcome in mapping:
+                outcome = {
+                    "outcome_type": mapping[call_outcome],
+                    "source": "follow_up_boss",
+                    "attribution_confidence": 0.8,
+                    "notes": f"Mapped from FUB call outcome: {item.get('outcome')}",
+                }
+                confidence = 0.85
+
+        elif kind == "text":
+            incoming = bool(item.get("isIncoming"))
+            execution = {
+                "action_type": "text",
+                "status": "completed",
+                "external_system": "follow_up_boss",
+                "external_reference": f"text:{external_id}",
+                "notes": "Incoming text detected." if incoming else "Outgoing text detected.",
+            }
+            if incoming:
+                outcome = {
+                    "outcome_type": "replied",
+                    "source": "follow_up_boss",
+                    "attribution_confidence": 0.9,
+                    "notes": "Mapped from an incoming FUB text message.",
+                }
+                confidence = 0.9
+
+        else:
+            event_type = str(item.get("type") or item.get("eventType") or "").strip()
+            if not event_type:
+                return None
+            event_lower = event_type.lower()
+            if event_lower == "incoming call":
+                outcome = {
+                    "outcome_type": "replied",
+                    "source": "follow_up_boss",
+                    "attribution_confidence": 0.65,
+                    "notes": "Mapped from FUB Incoming Call event.",
+                }
+            elif event_lower in {"appointment booked", "appointment created", "appointment set", "consultation set"}:
+                outcome = {
+                    "outcome_type": "appointment_booked",
+                    "source": "follow_up_boss",
+                    "attribution_confidence": 0.95,
+                    "notes": f"Mapped from FUB event: {event_type}",
+                }
+                confidence = 0.95
+            else:
+                reason = (
+                    f"Behavioral FUB event '{event_type}' detected and assigned to the most "
+                    "recent eligible recommendation; review before treating it as an outcome."
+                )
+                confidence = 0.5
+
+        candidate_id = f"fub:{kind}:{external_id}:{recommendation_id}"
+        return SyncCandidate(
+            candidate_id=candidate_id,
+            recommendation_id=recommendation_id,
+            person_id=person_id,
+            source_kind=kind,
+            external_reference=external_id,
+            observed_at=observed_at,
+            proposed_execution=execution,
+            proposed_outcome=outcome,
+            match_confidence=confidence,
+            review_required=True,
+            reason=reason,
+            raw_summary={
+                "id": external_id,
+                "type": item.get("type") or item.get("eventType"),
+                "outcome": item.get("outcome"),
+                "isIncoming": item.get("isIncoming"),
+            },
+        )
+
+    @staticmethod
+    def _serialize(item: SyncCandidate) -> dict[str, Any]:
+        return {
+            "candidate_id": item.candidate_id,
+            "recommendation_id": item.recommendation_id,
+            "person_id": item.person_id,
+            "source_kind": item.source_kind,
+            "external_reference": item.external_reference,
+            "observed_at": item.observed_at,
+            "proposed_execution": item.proposed_execution,
+            "proposed_outcome": item.proposed_outcome,
+            "match_confidence": item.match_confidence,
+            "review_required": item.review_required,
+            "reason": item.reason,
+            "raw_summary": item.raw_summary,
+        }
