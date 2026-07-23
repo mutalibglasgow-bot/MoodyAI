@@ -659,9 +659,16 @@ def get_leads() -> dict[str, Any]:
             # app.py script that prompts for lead information at import time.
             from services.followupboss import get_people
 
-            payload = get_people(limit=8)
+            payload = get_people(limit=25)
             people = payload.get("people", []) if isinstance(payload, dict) else []
-            return {"mode": "live", "items": [normalize_lead(person) for person in people]}
+            normalized = [normalize_lead(person) for person in people]
+            actionable = [item for item in normalized if item.get("needs_attention", True)]
+            actionable.sort(key=lambda item: float(item.get("score") or 0), reverse=True)
+            return {
+                "mode": "live",
+                "items": actionable[:8],
+                "suppressed_count": len(normalized) - len(actionable),
+            }
         except Exception as exc:
             return {"mode": "demo", "items": DEMO_LEADS, "warning": f"Live CRM unavailable: {type(exc).__name__}"}
     return {"mode": "demo", "items": DEMO_LEADS}

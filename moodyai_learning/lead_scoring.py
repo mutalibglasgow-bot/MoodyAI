@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from .policies import DEFAULT_THRESHOLDS, DEFAULT_WEIGHTS, ScoringPolicy, score_snapshot
+from .recommendation_quality import build_specific_action
 
 LEAD_POLICY_VERSION = "lead-score-v1.0"
 DEFAULT_RECOMMENDED_ACTION = "Review the lead context and make a personal follow-up today."
@@ -36,7 +37,7 @@ def score_lead(person: dict[str, Any], policy: ScoringPolicy | None = None) -> L
     return LeadScoreResult(
         score=score,
         predicted_class=predicted_class,
-        recommended_action=DEFAULT_RECOMMENDED_ACTION,
+        recommended_action=build_specific_action(person, predicted_class),
         feature_contributions=contributions,
         policy_version=selected.version,
     )

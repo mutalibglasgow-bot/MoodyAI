@@ -7,6 +7,7 @@ from typing import Any, Callable, TypeVar
 from .lead_scoring import score_lead
 from .policies import PolicyRegistry
 from .service import RecommendationService
+from .recommendation_quality import build_why_now, determine_attention_state
 
 T = TypeVar("T")
 
@@ -79,6 +80,13 @@ def normalize_and_record_lead(
     latest_evaluation, evaluation_recommendation_id = _latest_across_history(
         history, ledger.get_evaluation_for_recommendation, "evaluated_at"
     )
+    attention = determine_attention_state(
+        recommendation_created_at=record.created_at,
+        last_activity=person.get("lastActivity"),
+        execution=latest_execution,
+        outcome=latest_outcome,
+        evaluation=latest_evaluation,
+    )
 
     return {
         "id": person.get("id"),
@@ -91,6 +99,10 @@ def normalize_and_record_lead(
         or person.get("created")
         or "No recent activity",
         "recommendedAction": result.recommended_action,
+        "whyNow": build_why_now(person, result.score, result.predicted_class),
+        "needs_attention": attention.needs_attention,
+        "workflow_state": attention.workflow_state,
+        "suppression_reason": attention.suppression_reason,
         "recommendation_id": record.recommendation_id,
         "policy_version": record.policy_version,
         "recommendation_recorded": inserted,

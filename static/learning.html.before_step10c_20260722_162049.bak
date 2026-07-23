@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MoodyAI Learning Console</title>
+  <style>
+    :root { color-scheme: light; --bg:#f5f5f3; --panel:#fff; --ink:#171717; --muted:#6b6b67; --line:#deded8; --soft:#efefe9; --good:#216e4e; --warn:#8a5a00; --bad:#a12a2a; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:var(--bg); color:var(--ink); }
+    header { padding:28px max(24px,calc((100vw - 1240px)/2)); border-bottom:1px solid var(--line); background:rgba(255,255,255,.88); position:sticky; top:0; z-index:5; backdrop-filter:blur(12px); }
+    h1 { margin:0 0 6px; font-size:24px; letter-spacing:-.02em; }
+    .subtitle { color:var(--muted); font-size:14px; }
+    main { max-width:1240px; margin:0 auto; padding:24px; }
+    .toolbar { display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between; margin-bottom:18px; }
+    .toolbar-actions { display:flex; gap:8px; flex-wrap:wrap; }
+    button,select,input,textarea { font:inherit; }
+    button { border:1px solid var(--line); background:var(--panel); color:var(--ink); border-radius:8px; padding:9px 12px; cursor:pointer; }
+    button.primary { background:var(--ink); color:white; border-color:var(--ink); }
+    button:disabled { opacity:.45; cursor:not-allowed; }
+    .status { font-size:13px; color:var(--muted); }
+    .metrics { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; margin-bottom:18px; }
+    .metric { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:14px; }
+    .metric .label { color:var(--muted); font-size:12px; margin-bottom:8px; }
+    .metric .value { font-size:24px; font-weight:650; letter-spacing:-.03em; }
+    .layout { display:grid; grid-template-columns:minmax(300px,.9fr) minmax(480px,1.4fr); gap:16px; }
+    .panel { background:var(--panel); border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+    .panel-head { padding:15px 16px; border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .panel-head h2 { margin:0; font-size:15px; }
+    .queue { max-height:720px; overflow:auto; }
+    .lead { padding:14px 16px; border-bottom:1px solid var(--line); cursor:pointer; }
+    .lead:last-child { border-bottom:0; }
+    .lead:hover,.lead.active { background:var(--soft); }
+    .lead-top { display:flex; justify-content:space-between; gap:12px; }
+    .lead-name { font-weight:650; }
+    .lead-meta,.small { margin-top:5px; color:var(--muted); font-size:12px; line-height:1.45; }
+    .badge { display:inline-flex; align-items:center; border:1px solid var(--line); border-radius:999px; padding:3px 7px; font-size:11px; white-space:nowrap; background:white; }
+    .badge.hot { color:var(--bad); }.badge.warm { color:var(--warn); }.badge.cold { color:var(--muted); }.badge.good { color:var(--good); }
+    .detail { padding:18px; }
+    .empty { padding:50px 20px; text-align:center; color:var(--muted); }
+    .section { border-top:1px solid var(--line); padding-top:16px; margin-top:18px; }
+    .section:first-child { border-top:0; padding-top:0; margin-top:0; }
+    .section h3 { font-size:13px; margin:0 0 10px; }
+    .kv { display:grid; grid-template-columns:130px 1fr; gap:8px 12px; font-size:13px; }
+    .kv .key { color:var(--muted); }
+    .contrib { display:flex; flex-wrap:wrap; gap:6px; }
+    .contrib span { background:var(--soft); border-radius:6px; padding:5px 7px; font-size:11px; }
+    .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    label { display:block; color:var(--muted); font-size:11px; margin-bottom:5px; }
+    select,input,textarea { width:100%; border:1px solid var(--line); border-radius:8px; background:white; padding:9px 10px; color:var(--ink); }
+    textarea { min-height:72px; resize:vertical; }
+    .actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+    .history { margin:8px 0 0; padding:0; list-style:none; }
+    .history li { padding:8px 0; border-top:1px solid var(--line); font-size:12px; }
+    .history li:first-child { border-top:0; }
+    .error { color:var(--bad); }
+    .success { color:var(--good); }
+    .policies { margin-top:16px; }
+    pre { white-space:pre-wrap; word-break:break-word; font-size:11px; background:var(--soft); padding:10px; border-radius:8px; }
+    @media (max-width:900px){ .metrics{grid-template-columns:repeat(2,1fr)} .layout{grid-template-columns:1fr} .queue{max-height:420px} }
+  </style>
+</head>
+<body>
+<header>
+  <h1>MoodyAI Learning Console</h1>
+  <div class="subtitle">Review recommendations, record what happened, and measure whether the system was right.</div>
+</header>
+<main>
+  <div class="toolbar">
+    <div id="systemStatus" class="status">Loading…</div>
+    <div class="toolbar-actions">
+      <button id="refreshBtn">Refresh</button>
+      <button id="evaluateBtn" class="primary">Run evaluation</button>
+      <button id="proposalBtn">Generate proposals</button>
+    </div>
+  </div>
+  <section class="metrics" id="metrics"></section>
+  <section class="layout">
+    <div class="panel">
+      <div class="panel-head"><h2>Recommendation queue</h2><span id="leadCount" class="small"></span></div>
+      <div class="queue" id="queue"></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h2>Recommendation lifecycle</h2><span id="selectedState" class="badge"></span></div>
+      <div id="detail" class="detail"><div class="empty">Select a recommendation.</div></div>
+    </div>
+  </section>
+  <section class="panel policies">
+    <div class="panel-head"><h2>Policy governance</h2><span id="activePolicy" class="badge good"></span></div>
+    <div class="detail" id="policyArea"><div class="small">Loading policies and proposals…</div></div>
+  </section>
+</main>
+<script>
+const state={leads:[],selected:null,summary:null,policies:null,proposals:null};
+const $=id=>document.getElementById(id);
+async function api(path,options={}){ const r=await fetch(path,{headers:{"Content-Type":"application/json",...(options.headers||{})},...options}); const text=await r.text(); let data={}; try{data=text?JSON.parse(text):{}}catch{throw new Error(text||`HTTP ${r.status}`)} if(!r.ok) throw new Error(data.detail||`HTTP ${r.status}`); return data; }
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));}
+function items(payload){return Array.isArray(payload)?payload:(payload.items||payload.leads||[]);}
+function metric(label,value){return `<div class="metric"><div class="label">${esc(label)}</div><div class="value">${esc(value??0)}</div></div>`;}
+function renderMetrics(){const s=state.summary||{}; $("metrics").innerHTML=[metric("Recommendations",s.recommendations),metric("Executed",s.executed),metric("Evaluated",s.evaluated),metric("Response rate",s.response_rate==null?"—":Math.round(s.response_rate*100)+"%"),metric("HOT precision",s.hot_lead_precision==null?"—":Math.round(s.hot_lead_precision*100)+"%")].join("");}
+function latestStatus(l){if(l.outcome)return `Outcome: ${l.outcome.outcome_type}`; if(l.execution)return `Execution: ${l.execution.status}`; if(l.decision)return `Decision: ${l.decision.status}`; return "Awaiting decision";}
+function renderQueue(){ $("leadCount").textContent=`${state.leads.length} leads`; $("queue").innerHTML=state.leads.map((l,i)=>`<div class="lead ${state.selected===i?'active':''}" data-i="${i}"><div class="lead-top"><div class="lead-name">${esc(l.name)}</div><span class="badge ${(l.temperature||'').toLowerCase()}">${esc(l.temperature)} ${esc(l.score)}</span></div><div class="lead-meta">${esc(l.stage)} · ${esc(l.source)}</div><div class="small">${esc(latestStatus(l))}</div></div>`).join("")||'<div class="empty">No recommendations available.</div>'; document.querySelectorAll('.lead').forEach(el=>el.onclick=()=>{state.selected=Number(el.dataset.i);renderQueue();renderDetail();});}
+function renderDetail(){const l=state.leads[state.selected]; if(!l){$("detail").innerHTML='<div class="empty">Select a recommendation.</div>';return;} const rid=l.recommendation_id; $("selectedState").textContent=latestStatus(l); const contrib=Object.entries(l.feature_contributions||{}).map(([k,v])=>`<span>${esc(k)}: +${esc(v)}</span>`).join(''); $("detail").innerHTML=`
+<div class="section"><div class="kv"><div class="key">Lead</div><div><strong>${esc(l.name)}</strong></div><div class="key">Recommendation ID</div><div class="small">${esc(rid)}</div><div class="key">Policy</div><div>${esc(l.policy_version)}</div><div class="key">Recommended action</div><div>${esc(l.recommendedAction)}</div></div><div class="contrib" style="margin-top:12px">${contrib}</div></div>
+<div class="section"><h3>1. Human decision</h3><div class="form-grid"><div><label>Status</label><select id="decisionStatus"><option>accepted</option><option>modified</option><option>rejected</option><option>deferred</option></select></div><div><label>Modified action</label><input id="selectedAction" placeholder="Required only when modified"></div></div><label style="margin-top:9px">Reason</label><textarea id="decisionReason" placeholder="Why are you making this decision?"></textarea><div class="actions"><button class="primary" id="saveDecision">Save decision</button></div></div>
+<div class="section"><h3>2. Execution</h3><div class="form-grid"><div><label>Action type</label><select id="actionType"><option>call</option><option>text</option><option>email</option><option>note</option><option>task</option><option>other</option></select></div><div><label>Status</label><select id="executionStatus"><option>completed</option><option>started</option><option>failed</option><option>canceled</option></select></div></div><label style="margin-top:9px">Notes</label><textarea id="executionNotes" placeholder="What actually happened?"></textarea><div class="actions"><button class="primary" id="saveExecution">Record execution</button></div></div>
+<div class="section"><h3>3. Outcome</h3><div class="form-grid"><div><label>Observed result</label><select id="outcomeType"><option>no_response</option><option>replied</option><option>qualified_conversation</option><option>appointment_booked</option><option>active_client</option><option>under_contract</option><option>closed</option><option>not_interested</option><option>invalid_lead</option><option>already_has_agent</option><option>wrong_number</option></select></div><div><label>Attribution confidence</label><select id="confidence"><option value="1">100%</option><option value="0.75">75%</option><option value="0.5">50%</option><option value="0.25">25%</option></select></div></div><label style="margin-top:9px">Notes</label><textarea id="outcomeNotes" placeholder="What result did you observe?"></textarea><div class="actions"><button class="primary" id="saveOutcome">Record outcome</button></div></div>
+<div id="message" class="small"></div>`;
+$("decisionStatus").value=l.decision?.status||"accepted"; $("selectedAction").value=l.decision?.selected_action||""; $("decisionReason").value=l.decision?.reason||"";
+$("saveDecision").onclick=()=>submitDecision(rid); $("saveExecution").onclick=()=>submitExecution(rid); $("saveOutcome").onclick=()=>submitOutcome(rid); }
+function msg(text,ok=true){const e=$("message"); if(e){e.textContent=text;e.className=`small ${ok?'success':'error'}`;}}
+async function submitDecision(rid){try{const status=$("decisionStatus").value; await api(`/api/recommendations/${encodeURIComponent(rid)}/decision`,{method:"POST",body:JSON.stringify({status,selected_action:$("selectedAction").value||null,reason:$("decisionReason").value||null,decided_by:"Moody"})}); msg("Decision saved."); await refreshAll(true);}catch(e){msg(e.message,false);}}
+async function submitExecution(rid){try{await api(`/api/recommendations/${encodeURIComponent(rid)}/executions`,{method:"POST",body:JSON.stringify({action_type:$("actionType").value,status:$("executionStatus").value,notes:$("executionNotes").value||null,external_system:"manual",external_reference:null,performed_by:"Moody"})}); msg("Execution recorded."); await refreshAll(true);}catch(e){msg(e.message,false);}}
+async function submitOutcome(rid){try{const r=await api(`/api/recommendations/${encodeURIComponent(rid)}/outcomes`,{method:"POST",body:JSON.stringify({outcome_type:$("outcomeType").value,source:"manual",attribution_confidence:Number($("confidence").value),notes:$("outcomeNotes").value||null})}); msg(r.duplicate?"Identical outcome already exists.":"Outcome recorded."); await refreshAll(true);}catch(e){msg(e.message,false);}}
+function renderPolicies(){const p=state.policies||{}, props=items(state.proposals||{}); $("activePolicy").textContent=`Active: ${p.active_policy_version||'unknown'}`; $("policyArea").innerHTML=`<div class="small">${props.length?`${props.length} policy proposal(s) available.`:'No policy proposals yet. MoodyAI requires sufficient evaluated evidence before proposing a change.'}</div>${props.map(x=>`<pre>${esc(JSON.stringify(x,null,2))}</pre>`).join('')}`;}
+async function refreshAll(preserve=false){const oldRid=preserve&&state.leads[state.selected]?.recommendation_id; $("systemStatus").textContent="Refreshing…"; try{const [leads,summary,policies,proposals]=await Promise.all([api('/api/leads'),api('/api/learning/summary'),api('/api/learning/policies'),api('/api/learning/proposals')]); state.leads=items(leads);state.summary=summary;state.policies=policies;state.proposals=proposals;if(oldRid)state.selected=state.leads.findIndex(x=>x.recommendation_id===oldRid);if(state.selected<0&&state.leads.length)state.selected=0;renderMetrics();renderQueue();renderDetail();renderPolicies();$("systemStatus").textContent=`Live · ${new Date().toLocaleTimeString()}`;}catch(e){$("systemStatus").innerHTML=`<span class="error">${esc(e.message)}</span>`;}}
+$("refreshBtn").onclick=()=>refreshAll(true);
+$("evaluateBtn").onclick=async()=>{try{$("systemStatus").textContent="Evaluating…";await api('/api/learning/evaluate',{method:'POST'});await refreshAll(true);}catch(e){$("systemStatus").innerHTML=`<span class="error">${esc(e.message)}</span>`;}};
+$("proposalBtn").onclick=async()=>{try{$("systemStatus").textContent="Analyzing policy evidence…";const r=await api('/api/learning/proposals/generate',{method:'POST'});await refreshAll(true);if(r.insufficient_data)$("systemStatus").textContent=r.reason;}catch(e){$("systemStatus").innerHTML=`<span class="error">${esc(e.message)}</span>`;}};
+refreshAll();
+</script>
+</body>
+</html>
