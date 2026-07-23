@@ -33,6 +33,7 @@ from moodyai_learning.background_sync import BackgroundSyncCoordinator
 from moodyai_learning.backups import DatabaseBackupCoordinator
 from moodyai_learning.production import RequestLogMiddleware, configure_structured_logging, validate_startup
 from moodyai_learning.paths import database_path, backup_directory
+from moodyai_learning.today_brief import build_today_brief
 
 ROOT = Path(__file__).resolve().parent
 load_dotenv(ROOT / ".env")
@@ -57,7 +58,7 @@ app.mount("/static", StaticFiles(directory=ROOT / "static"), name="static")
 app.add_middleware(RequestLogMiddleware)
 
 
-PROTECTED_PREFIXES = ("/learning", "/api/learning", "/api/recommendations", "/api/leads")
+PROTECTED_PREFIXES = ("/learning", "/today", "/api/learning", "/api/recommendations", "/api/leads", "/api/today")
 AUTH_EXEMPT_PATHS = {"/login", "/logout", "/health", "/api/health"}
 
 
@@ -650,6 +651,11 @@ def opportunity_detail(opportunity_id: str) -> dict[str, Any]:
     raise HTTPException(status_code=404, detail="Opportunity not found")
 
 
+@app.get("/today", include_in_schema=False)
+def today_page() -> FileResponse:
+    return FileResponse(ROOT / "static" / "today.html")
+
+
 @app.get("/api/leads")
 def get_leads() -> dict[str, Any]:
     if live_fub_available():
@@ -672,6 +678,13 @@ def get_leads() -> dict[str, Any]:
         except Exception as exc:
             return {"mode": "demo", "items": DEMO_LEADS, "warning": f"Live CRM unavailable: {type(exc).__name__}"}
     return {"mode": "demo", "items": DEMO_LEADS}
+
+
+@app.get("/api/today")
+def today_brief(max_items: int = 5) -> dict[str, Any]:
+    if not 1 <= max_items <= 8:
+        raise HTTPException(status_code=400, detail="max_items must be between 1 and 8")
+    return build_today_brief(get_leads(), max_items=max_items)
 
 
 @app.post("/api/recommendations/{recommendation_id}/decision")
