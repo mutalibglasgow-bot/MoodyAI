@@ -680,6 +680,12 @@ def get_leads() -> dict[str, Any]:
     return {"mode": "demo", "items": DEMO_LEADS}
 
 
+@app.get("/api/demo/leads")
+def get_demo_leads() -> dict[str, Any]:
+    """Return sanitized demonstration leads for the public portfolio."""
+    return {"mode": "demo", "items": DEMO_LEADS}
+
+
 @app.get("/api/today")
 def today_brief(max_items: int = 5) -> dict[str, Any]:
     if not 1 <= max_items <= 8:

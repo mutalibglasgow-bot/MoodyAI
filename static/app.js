@@ -615,7 +615,7 @@ async function boot() {
     const [dashboard, opportunities, leads] = await Promise.all([
       request('/api/dashboard'),
       request('/api/opportunities'),
-      request('/api/leads'),
+      request('/api/demo/leads'),
     ]);
 
     state.opportunities = opportunities.items || [];
